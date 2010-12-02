@@ -1,0 +1,103 @@
+<?page title="Lista de Series" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?><zk>
+	<window id="listarSerie" mode="overlapped" title="Lista de Séries" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.SerieController" onClose="self.visible=true;" closable="true" maximizable="true" minimizable="true">
+	<borderlayout>
+	
+	<north size="60px">
+	<borderlayout>
+		<center style="background-color:#B1CBD5">
+		<html><![CDATA[<h2 style="color:#FFFFFF;margin-left:10px">Séries Cadastradas</h2>]]></html></center>
+		<east style="background-color:#B1CBD5">
+		<toolbarbutton src="" href=""/></east>
+	</borderlayout>
+	</north>
+	
+	<west size="640px" splittable="true" flex="true">
+	<borderlayout id="pesquisa">
+		<north visible="true">
+			<div align="center">
+				<hbox>Pesquisa:
+					<textbox id="ProcurarSerie" value=""/>
+					<button id="resultadoSerie" label="Busca"/>	
+				</hbox>
+			</div>
+		</north>		
+			
+			<center border="none" flex="true">
+				<listbox id="ListagemSerie" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemSerie$composer.getInstance.listarSerie}"
+			mold="paging" pageSize="10" selectedItem="@{listarSerie$composer.selected}">
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="SerieCabeça" align="center" width="100px" label="Serie" sort="auto" />
+							<listheader id="NivelCabeça" align="center" width="100px" label="Nivel" sort="auto" />
+															
+					</listhead>
+						
+						<listitem self="@{each=serie}">
+							<listcell label="@{serie.id}"/>
+							<listcell label="@{serie.descricao}"/>
+							<listcell label="@{serie.nivelEscolar.nivel}"/>
+						</listitem>
+	    		</listbox>
+	    	</center>
+	</borderlayout>
+</west>
+
+<center>
+	<div id="DetalheSerie">
+		<div id="VerSerie" visible="true" width="100%">
+			<grid width="100%">
+
+			 <columns>
+				<column align="right" width="90px"/>
+				<column align="left" />
+  	         </columns>
+				<rows>
+					<row>Id: <label value="@{listarSerie$composer.selected.id}" />		</row>
+					<row>Descrição: <label value="@{listarSerie$composer.selected.descricao}" />	</row>
+					<row>Nivel Escolar: <label value="@{listarSerie$composer.selected.nivelEscolar.nivel}" />	</row>
+				</rows>
+			</grid>
+			<separator/>
+			<div align="right">
+				<hbox>
+					<button id="criarSerie" label="Novo" href="../Cadastros/CadastroSerie.zul"/>
+					<button id="editarSerie" label="Editar" disabled="@{listarSerie$composer.notSelected,load-when='ListagemSerie.onSelect'}"/>
+					<button id="deletarSerie" label="Deletar" disabled="@{listarSerie$composer.notSelected,load-when='ListagemSerie.onSelect'}"/>
+				</hbox>
+			</div>
+		</div>
+		
+		<div id="EditarSerie" visible="false">
+			<grid width="100%" fixedLayout="true">
+				<columns>
+					<column align="right" width="100px"/>
+					<column align="left"/>
+				</columns>
+				<rows>
+					<row>Id :<intbox id="id" value="@{listarSerie$composer.selected.id}" disabled="true" /></row>
+					<row>Descrição :<textbox id="descricao" value="@{listarSerie$composer.selected.descricao}" /></row>
+					  <row>Nivel Escolar :<textbox id="nivel" value="@{listarSerie$composer.selected.nivelEscolar.nivel}" /></row>
+					<!--<row>Bloco:<combobox id="nivel" value="@{listarSerie$composer.selected.nivel.descricao}"  apply="br.com.sigep.facade.Facade" 
+					selectedItem="@{listarSala$composer.selected.nivel}" model="@{nivel$composer.getInstance.listarNivelEscolar}"> 
+						<comboitem value="nivel.descricao" /> 
+					</combobox> 
+					</row>		-->		
+				</rows>
+			</grid>
+			<separator/>
+					<div align="right">
+				<hbox>
+					<button id="salvarSerie" label="Salvar"/>
+					<button id="cancelar" label="Cancelar"/>
+				</hbox>
+					</div>
+		</div>
+	</div>
+</center>
+						
+	</borderlayout>		
+	</window>
+</zk>

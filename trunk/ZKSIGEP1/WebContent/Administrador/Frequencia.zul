@@ -1,0 +1,185 @@
+<?page title="Registro de Disciplinas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexFrequencia"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexFrequencia" mode="overlapped" title="Lista de Frequências" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.FrequenciaController" closable="true" maximizable="true" minimizable="true" >
+
+	<div id="JanelaFiltroParaListarDisciplina" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;">
+		<groupbox mold="3d" id="groupboxFiltro">
+        	 <caption label="Filtro - Listar Disciplinas"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>Ano Letivo:<combobox id="anoLetivoCombo" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowNivel">Nível Escolar:<combobox id="nivelCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowSerie">Série:<combobox id="serieCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowTurma">Turma:<combobox id="turmaCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center"><button id="listarDisciplinaFiltro" label="Listar Disciplinas"/></div>
+			
+		</groupbox>
+	
+	</div>
+	
+	<div id="janelaDisciplina" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+	
+			<groupbox mold="3d" id="groupboxDisciplina">
+         	<caption label="Lista de Disciplinas"  />
+         			
+				<listbox id="ListagemDisciplina" mold="paging" pageSize="10" tooltiptext="Selecione uma Linha para Cadastrar as Faltas Referente à Disciplina!">
+						<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeCabeça" align="center" width="100px" label="Nome" sort="auto" />
+							<listheader id="CargaHorariaCabeça" align="center" width="100px" label="Carga Horária" sort="auto" />
+							<listheader id="NivelEscolarCabeça" align="center" width="50px" label="Nível Escolar" />
+							<listheader id="SerieCabeça" align="center" width="100px" label="Série" sort="auto" />
+							<listheader id="TurmaCabeça" align="center" width="100px" label="Turma" sort="auto" />
+							<listheader id="TurnoTurmaCabeça" align="center" width="100px" label="Turma" sort="auto" />
+							<listheader id="ProfessorCabeça" align="center" width="100px" label="Professor" sort="auto" />
+								
+						</listhead>
+						
+						<listitem self="@{each=registroDeDisciplina}">
+							<listcell label="@{registroDeDisciplina.disciplina.id}"/>
+							<listcell label="@{registroDeDisciplina.disciplina.nome}"/>
+							<listcell label="@{registroDeDisciplina.disciplina.cargaHoraria}"/>
+							<listcell label="@{registroDeDisciplina.disciplina.serie.nivelEscolar.nivel}"/>
+							<listcell label="@{registroDeDisciplina.disciplina.serie.descricao}"/>
+							<listcell label="@{registroDeDisciplina.turma.nome}"/>
+							<listcell label="@{registroDeDisciplina.turma.turno}"/>
+							<listcell label="@{registroDeDisciplina.professor.nome}"/>
+						</listitem>
+	    			</listbox>
+		</groupbox>
+				
+	</div>
+	
+<div id="janelaDisciplinaAluno" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+
+<tabbox>
+		<tabs align="center">
+			<tab label="Disciplina"></tab>
+			<tab label="Informações da Turma"></tab>
+			<tab label="Alunos"></tab>
+			<tab label="Frequência"></tab>
+		</tabs>
+		
+		<tabpanels>
+			
+		<tabpanel>
+			<groupbox mold="3d">
+			
+         	<caption label="Dados da Disciplina"  />
+         	
+         		<grid>
+         		
+         			<rows>
+         			
+         			<row>Id:<textbox id="id" disabled="true"/></row>
+         			<row>Disciplina:<label id="disciplina" /></row>
+         			<row>Professor:<label id="professor" /></row>
+					<row>Carga Horária:<label id="cargaHoraria" /></row>
+									
+					</rows>
+				
+				</grid>
+				
+				<separator bar="true"></separator>
+				
+			</groupbox>
+			
+		</tabpanel>
+			
+			<tabpanel>
+				<groupbox mold="3d" >
+					<caption label="Dados da Turma" />
+						<grid>
+							<columns>
+								<column width="20%" />
+								<column />
+							</columns>
+							<rows>
+								<row>Nome:<label id="nomeTurma"  width="155px" /></row>
+								<row>Modalidade:<label id="modalidade" width="155px" /></row>
+								<row>Qtd. de Alunos:<label id="qtdAluno" /></row>
+								<row>Ano Letivo:<label id="anoLetivo" /></row>
+								<row>Nível Escolar:<label id="nivelEscolar" width="200px" /></row>
+								<row>Série:<label id="serie" width="200px" /></row>
+								<row>Turno:<label id="turno" /></row>
+								<row>Sala:<label id="sala" /></row>
+					       </rows>
+					      
+						</grid>
+				</groupbox>	
+			</tabpanel> 
+			
+			<tabpanel>
+				 <groupbox mold="3d">
+                    <caption label="Lista de Alunos"  />
+						
+					<listbox id="ListagemAluno" >
+						<listhead sizable="true">
+							<listheader id="MatriculaAlunoCabeça" align="center" width="50px" label="Matrícula" />
+							<listheader id="NomeAlunoCabeça" align="center" width="50px" label="Nome"/>	 		
+						</listhead>
+						
+	    			</listbox>
+							
+				</groupbox>  
+				
+			</tabpanel> 
+			
+		<tabpanel>
+				 
+				 <groupbox mold="3d">
+                    <caption label="Frequências dos Alunos"  />
+						
+						<grid>
+							<rows id="rowFrequencias">
+							
+							</rows>
+						</grid>
+										<separator bar="true"></separator>
+					<div align="center"><button id="adicionarFrequencias" label="Adicionar"/></div>		
+				</groupbox>  
+				
+			</tabpanel> 
+			
+		</tabpanels>
+	</tabbox>
+	
+	<h:br/>
+	
+	<div align="center" id="center">
+		<button id="voltarPaginaListaFrequencia" label="Listar Disciplina"/>	
+    </div>
+	
+</div>
+
+		<zscript>
+			<![CDATA[
+			 
+            anoLetivoCombo.getChildren().clear();
+	  	 	for (br.com.sigep.bean.AnoLetivo ano : br.com.sigep.facade.Facade.getInstance().listarAnoLetivo()) {
+				Comboitem comboitem = new Comboitem();
+				comboitem.setLabel("Ano - " + ano.getAno());
+				comboitem.setValue(ano);
+				anoLetivoCombo.appendChild(comboitem);
+		 	}
+
+       		]]>
+		</zscript>
+
+</window>
+
+
+</zk>

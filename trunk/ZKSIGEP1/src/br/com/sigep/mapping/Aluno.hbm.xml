@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.com.sigep.bean">
+	<joined-subclass name="Aluno" extends="Pessoa">
+	        <key column="Pessoa_id"/>
+		<property name="paiAluno" />
+		<property name="maeAluno" />
+		<property name="tipoTelefone" />
+		<property name="ramalResponsavel" />
+		<property name="nascMae" />
+		<property name="nascPai" />
+		<property name="profissao" />
+		<property name="responsavel" />
+		<property name="telefoneResponsavel" />
+		<property name="situacao" />
+		<property name="etnia" />
+		<property name="dataCadastro" />
+		<property name="foto" />
+		<many-to-one name="recomendacoesMedicas" unique="true" class="RecomendacoesMedicas" cascade="all"/>
+		<many-to-one name="registro" unique="true" class="Registro" cascade="all" />
+		<list name="matricula" cascade="all">
+			<key column="idAluno" />
+			<index column="indiceMatricula" />
+			<one-to-many class="Matricula" />
+		</list>
+	</joined-subclass>
+</hibernate-mapping>

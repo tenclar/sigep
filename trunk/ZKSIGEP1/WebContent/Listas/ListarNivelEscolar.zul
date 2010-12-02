@@ -1,0 +1,98 @@
+<?page title="Lista de Níveis Escolares" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?><zk>
+	<window id="listarNivelEscolar" mode="overlapped" title="Lista de Níveis Escolares" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.NivelEscolarController" onClose="self.visible=true;" closable="true" maximizable="true" minimizable="true">
+	<borderlayout>
+	
+	<north size="60px">
+	<borderlayout>
+		<center style="background-color:#B1CBD5">
+		<html><![CDATA[<h2 style="color:#FFFFFF;margin-left:10px">Níveis Escolares Cadastrados</h2>]]></html></center>
+		<east style="background-color:#B1CBD5">
+		<toolbarbutton src="" href=""/></east>
+	</borderlayout>
+	</north>
+	
+	<west size="640px" splittable="true" flex="true">
+	<borderlayout id="pesquisa">
+		<north visible="true">
+			<div align="center">
+				<hbox>Pesquisa:
+					<textbox id="ProcurarNivelEscolar" value=""/>
+					<button id="resultadoNivelEscolar" label="Busca"/>	
+				</hbox>
+			</div>
+		</north>		
+			
+			<center border="none" flex="true">
+				<listbox id="ListagemNivelEscolar" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemNivelEscolar$composer.getInstance.listarNivelEscolar}"
+			mold="paging" pageSize="10" selectedItem="@{listarNivelEscolar$composer.selected}">					
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NivelCabeça" align="center" width="100px" label="Nivel Escolar" sort="auto" />
+							<listheader id="EtapasCabeça" align="center" width="100px" label="Etapas" sort="auto" />
+															
+					</listhead>
+						
+						<listitem self="@{each=nivel}">
+							<listcell label="@{nivel.id}"/>
+							<listcell label="@{nivel.nivel}"/>
+							<listcell label="@{nivel.etapas}"/>
+						</listitem>
+	    		</listbox>
+	    	</center>
+	</borderlayout>
+</west>
+
+<center>
+	<div id="DetalheNivelEscolar">
+		<div id="VerNivelEscolar" visible="true" width="100%">
+			<grid width="100%">
+
+			 <columns>
+				<column align="right" width="90px"/>
+				<column align="left" />
+  	         </columns>
+				<rows>
+					<row>Id: <label value="@{listarNivelEscolar$composer.selected.id}" />		</row>
+					<row>Nível Escolar: <label value="@{listarNivelEscolar$composer.selected.nivel}" />	</row>
+					<row>Etapas: <label value="@{listarNivelEscolar$composer.selected.etapas}" />	</row>
+				</rows>
+			</grid>
+			<separator/>
+			<div align="right">
+				<hbox>
+					<button id="criarNivelEscolar" label="Novo" href="../Cadastros/CadastroNivelEscolar.zul"/>
+					<button id="editarNivelEscolar" label="Editar" disabled="@{listarNivelEscolar$composer.notSelected,load-when='ListagemNivelEscolar.onSelect'}"/>
+					<button id="deletarNivelEscolar" label="Deletar" disabled="@{listarNivelEscolar$composer.notSelected,load-when='ListagemNivelEscolar.onSelect'}"/>
+				</hbox>
+			</div>
+		</div>
+		
+		<div id="EditarNivelEscolar" visible="false">
+			<grid width="100%" fixedLayout="true">
+				<columns>
+					<column align="right" width="90px"/>
+					<column align="left"/>
+				</columns>
+				<rows>
+					<row>Id :<intbox id="id" value="@{listarNivelEscolar$composer.selected.id}" disabled="true" /></row>
+					<row>Nível Escolar :<textbox id="nivel" value="@{listarNivelEscolar$composer.selected.nivel}" /></row>
+					<row>Etapas :<intbox id="etapas" value="@{listarNivelEscolar$composer.selected.etapas}" /></row>
+				</rows>
+			</grid>
+			<separator/>
+					<div align="right">
+				<hbox>
+					<button id="salvarNivelEscolar" label="Salvar"/>
+					<button id="cancelar" label="Cancelar"/>
+				</hbox>
+					</div>
+		</div>
+	</div>
+</center>
+						
+	</borderlayout>		
+	</window>
+</zk>

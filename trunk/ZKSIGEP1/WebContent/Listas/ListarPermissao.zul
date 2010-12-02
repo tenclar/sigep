@@ -1,0 +1,103 @@
+<?page title="Lista de Permissões" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?><zk>
+	<window id="listarPermissao" mode="overlapped" title="Lista de Permissões" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.PermissaoController" onClose="self.visible=true;" closable="true" maximizable="true" minimizable="true">
+	<borderlayout>
+	
+	<north size="60px">
+	<borderlayout>
+		<center style="background-color:#B1CBD5">
+		<html><![CDATA[<h2 style="color:#FFFFFF;margin-left:10px">Permissões Cadastradas</h2>]]></html></center>
+		<east style="background-color:#B1CBD5">
+		<toolbarbutton src="" href=""/></east>
+	</borderlayout>
+	</north>
+	
+	<west size="640px" splittable="true" flex="true">
+	<borderlayout id="pesquisa">
+		<north visible="true">
+			<div align="center">
+				<hbox>Pesquisa:
+					<textbox id="ProcurarPermissao" value=""/>
+					<button id="resultadoPermissao" label="Busca"/>	
+				</hbox>
+			</div>
+		</north>		
+			
+			<center border="none" flex="true">
+				<listbox id="ListagemPermissao" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemPermissao$composer.getInstance.listarPermissao}"
+			mold="paging" pageSize="10" selectedItem="@{listarPermissao$composer.selected}">
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NivelCabeça" align="center" width="100px" label="Nível" sort="auto" />
+							<listheader id="TipoDeUsuarioCabeça" align="center" width="100px" label="Tipo de Usuário" sort="auto" />
+													
+					</listhead>
+						
+						<listitem self="@{each=permissao}">
+							<listcell label="@{permissao.id}"/>
+							<listcell label="@{permissao.nivel}"/>
+							<listcell label="@{permissao.tipoDeUsuario.descricao}"/>
+						</listitem>
+	    		</listbox>
+	    	</center>
+	</borderlayout>
+</west>
+
+<center>
+	<div id="DetalhePermissao">
+		<div id="VerPermissao" visible="true" width="100%">
+			<grid width="100%">
+
+			 <columns>
+				<column align="right" width="110px"/>
+				<column align="left" />
+  	         </columns>
+				<rows>
+					<row>Id: <label value="@{listarPermissao$composer.selected.id}" />		</row>
+					<row>Nível: <label value="@{listarPermissao$composer.selected.nivel}" />	</row>
+					<row>Tipo de Usuário: <label value="@{listarPermissao$composer.selected.tipoDeUsuario.descricao}" />	</row>
+				</rows>
+			</grid>
+			<separator/>
+			<div align="right">
+				<hbox>
+					<button id="criarPermissao" label="Novo" href="../Cadastros/CadastroPermissao.zul"/>
+					<button id="editarPermissao" label="Editar" disabled="@{listarPermissao$composer.notSelected,load-when='ListagemPermissao.onSelect'}"/>
+					<button id="deletarPermissao" label="Deletar" disabled="@{listarPermissao$composer.notSelected,load-when='ListagemPermissao.onSelect'}"/>
+				</hbox>
+			</div>
+		</div>
+		
+		<div id="EditarPermissao" visible="false">
+			<grid width="100%" fixedLayout="true">
+				<columns>
+					<column align="right" width="110px"/>
+					<column align="left"/>
+				</columns>
+				<rows>
+					<row>Id:<intbox id="id" value="@{listarPermissao$composer.selected.id}" disabled="true" /></row>
+					<row>Nível:<intbox id="nivel" value="@{listarPermissao$composer.selected.nivel}" /></row>
+					<row>Tipo de Usuário:<textbox id="tipoDeUsuario" value="@{listarPermissao$composer.selected.tipoDeUsuario.descricao}" /></row>
+					<!--<row>Tipo de Usuário:<combobox id="tipoDeUsuario" value="@{listarPermissao$composer.selected.bloco.nome}"  apply="br.com.sigep.facade.Facade" 
+					selectedItem="@{listarPermissao$composer.selected.tipoDeUsuario}" model="@{bloco$composer.getInstance.listarTipoDeUsuario}"> 
+						<comboitem value="tipoDeUsuario.descricao" /> 
+					</combobox> 
+					</row>		-->		
+				</rows>
+			</grid>
+			<separator/>
+					<div align="right">
+				<hbox>
+					<button id="salvarPermissao" label="Salvar"/>
+					<button id="cancelar" label="Cancelar"/>
+				</hbox>
+					</div>
+		</div>
+	</div>
+</center>
+						
+	</borderlayout>		
+	</window>
+</zk>

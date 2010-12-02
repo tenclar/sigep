@@ -1,0 +1,107 @@
+<?page title="Lista de Disciplinas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?><zk>
+	<window id="listarDisciplina" mode="overlapped" title="Lista de Salas" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.DisciplinaController" onClose="self.visible=true;" closable="true" maximizable="true" minimizable="true">
+	<borderlayout>
+	
+	<north size="60px">
+	<borderlayout>
+		<center style="background-color:#B1CBD5">
+		<html><![CDATA[<h2 style="color:#FFFFFF;margin-left:10px">Salas Disciplinas</h2>]]></html></center>
+		<east style="background-color:#B1CBD5">
+		<toolbarbutton src="" href=""/></east>
+	</borderlayout>
+	</north>
+	
+	<west size="640px" splittable="true" flex="true">
+	<borderlayout id="pesquisa">
+		<north visible="true">
+			<div align="center">
+				<hbox>Pesquisa:
+					<textbox id="ProcurarDisciplina" value=""/>
+					<button id="resultadoDisciplina" label="Busca"/>	
+				</hbox>
+			</div>
+		</north>		
+			
+			<center border="none" flex="true">
+				<listbox id="ListagemDisciplina" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemDisciplina$composer.getInstance.listarDisciplina}"
+			mold="paging" pageSize="10" selectedItem="@{listarDisciplina$composer.selected}">
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeCabeça" align="center" width="100px" label="Nome" sort="auto" />
+							<listheader id="CargaHorariaCabeça" align="center" width="100px" label="Carga Horária" sort="auto" />
+							<listheader id="SerieCabeça" align="center" width="100px" label="Série" sort="auto" />
+								
+					</listhead>
+						
+						<listitem self="@{each=disciplina}">
+							<listcell label="@{disciplina.id}"/>
+							<listcell label="@{disciplina.nome}"/>
+							<listcell label="@{disciplina.cargaHoraria}"/>
+							<listcell label="@{disciplina.serie.descricao}"/>
+						</listitem>
+	    		</listbox>
+	    	</center>
+	</borderlayout>
+</west>
+
+<center>
+	<div id="DetalheDisciplina">
+		<div id="VerDisciplina" visible="true" width="100%">
+			<grid width="100%">
+
+			 <columns>
+				<column align="right" width="100px"/>
+				<column align="left" />
+  	         </columns>
+				<rows>
+					<row>Id: <label value="@{listarDisciplina$composer.selected.id}" />		</row>
+					<row>Nome: <label value="@{listarDisciplina$composer.selected.nome}" />	</row>
+					<row>Carga Horária: <label value="@{listarDisciplina$composer.selected.cargaHoraria}" />	</row>
+					<row>Série: <label value="@{listarDisciplina$composer.selected.serie.descricao}" />	</row>
+				</rows>
+			</grid>
+			<separator/>
+			<div align="right">
+				<hbox>
+					<button id="criarDisciplina" label="Novo" href="../Cadastros/CadastroDisciplina.zul"/>
+					<button id="editarDisciplina" label="Editar" disabled="@{listarDisciplina$composer.notSelected,load-when='ListagemDisciplina.onSelect'}"/>
+					<button id="deletarDisciplina" label="Deletar" disabled="@{listarDisciplina$composer.notSelected,load-when='ListagemDisciplina.onSelect'}"/>
+				</hbox>
+			</div>
+		</div>
+		
+		<div id="EditarDisciplina" visible="false">
+			<grid width="100%" fixedLayout="true">
+				<columns>
+					<column align="right" width="105px"/>
+					<column align="left"/>
+				</columns>
+				<rows>
+					<row>Id :<intbox id="id" value="@{listarDisciplina$composer.selected.id}" disabled="true" /></row>
+					<row>Nome :<textbox id="nome" value="@{listarDisciplina$composer.selected.nome}" /></row>
+					<row>Carga Horária :<intbox id="cargaHoraria" value="@{listarDisciplina$composer.selected.cargaHoraria}" /></row>
+					  <row>Série :<textbox id="serie" value="@{listarDisciplina$composer.selected.serie.descricao}" /></row>
+					<!--<row>Série:<combobox id="serie" value="@{listarDisciplina$composer.selected.serie.descricao}"  apply="br.com.sigep.facade.Facade" 
+					selectedItem="@{listarDisciplina$composer.selected.serie}" model="@{serie$composer.getInstance.listarDisciplina}"> 
+						<comboitem value="serie.descricao" /> 
+					</combobox> 
+					</row>		-->		
+				</rows>
+			</grid>
+			<separator/>
+					<div align="right">
+				<hbox>
+					<button id="salvarDisciplina" label="Salvar"/>
+					<button id="cancelar" label="Cancelar"/>
+				</hbox>
+					</div>
+		</div>
+	</div>
+</center>
+						
+	</borderlayout>		
+	</window>
+</zk>

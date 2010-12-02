@@ -1,0 +1,21 @@
+<?page title="SIGEP - Sistema Gerenciador de Escola Pública" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+	<window id="IndexDirecionarLogin" mode="overlapped" border="normal" height="1000px"  width="100%">
+		
+	<label value="  Bem Vindo ao SIGEP: ${authentication.principal.username} "  style="font-weight:bold;color:#FFFFF;"></label><h:br />
+	<label value="  Você está sendo redirecionado..." style="font-weight:bold;color:#FFFFF;"></label><h:br />
+	<label value="  Aguarde"  style="font-weight:bold;color:#FFFFF;"></label><h:br />
+			
+	<div align="center" if="${authentication.authorities == '[ROLE_ADMINISTRADOR]'}">	
+ 	<h:meta http-equiv="refresh" content="0;URL=Administrador/Main.zul" />
+    </div>
+	
+	<div align="center" if="${authentication.authorities == '[ROLE_ALUNO]'}">	
+ 	<h:meta http-equiv="refresh" content="0;URL=Aluno/Main.zul" />
+    </div>
+    
+	</window>
+</zk>

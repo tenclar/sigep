@@ -1,0 +1,76 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexNivelEscolar"?>
+<zk>
+	<window id="indexNivelEscolar" title="Cadastro de Nível Escolar" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true" 
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.NivelEscolarController"
+		onClose="self.visible = false;  event.stopPropagation();">
+
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarNivelEscolar" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarNivelEscolar" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarNivelEscolar" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarNivelEscolar" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarNivelEscolar" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+		<separator bar="true"/>
+
+	<div id="cadastroNivelEscolar" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d">
+         	<caption label="Dados"  />  
+			<grid>
+				<rows>
+					<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+					<row>Nível Escolar:<textbox id="nivel"/></row>
+					<row>Etapas:<intbox id="etapas" /></row>
+				</rows>
+			</grid>
+			<separator bar="true"></separator>
+			<div align="center">
+			
+			<button id="adicionar" label="Adicionar"/>
+			<button id="salvar" label="Salvar"/>
+			<button id="cancelar" label="Cancelar"/>
+			
+			</div>
+			</groupbox>
+
+	</div>
+
+		<div id="pesquisarNivelEscolar" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarNivelEscolar"/>
+					<button id="resultadoNivelEscolar" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarNivelEscolar" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Nível Escolar"  />
+			<listbox id="ListagemNivelEscolar" multiple="false"	mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NivelCabeça" align="center" width="100px" label="Nivel Escolar" sort="auto" />
+							<listheader id="EtapasCabeça" align="center" width="100px" label="Etapas" sort="auto" />
+															
+					</listhead>
+						
+					<listitem self="@{each=nivel}">
+							<listcell label="@{nivel.id}"/>
+							<listcell label="@{nivel.nivel}"/>
+							<listcell label="@{nivel.etapas}"/>
+					</listitem>
+					
+	    	</listbox>
+	    	</groupbox>
+		</div>
+							
+	</window>
+</zk>

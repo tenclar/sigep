@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.com.sigep.bean">
+	<class name="Matricula" lazy="true">
+		<id name="id" >
+			<generator class="native"></generator>
+			<!-- <param name="sequence">id_matricula</param> Criar a sequence das tabelas -->
+		</id>
+		<property name="numero" />
+		<property name="codigoMec"/>
+		<property name="cre" />
+		<many-to-one name="turma" class="Turma"/>
+	</class>
+</hibernate-mapping>

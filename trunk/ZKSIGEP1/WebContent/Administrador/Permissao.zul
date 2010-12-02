@@ -1,0 +1,78 @@
+<?page title="Categoria" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexPermissao"?>
+<zk>
+	<window id="indexPermissao" title="Cadastro de Permissão" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true" 
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.PermissaoController"
+		onClose="self.visible = false;  event.stopPropagation();">
+
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarPermissao" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarPermissao" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarPermissao" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarPermissao" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarPermissao" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+		<separator bar="true"/>
+
+	<div id="cadastroPermissao" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d">
+         	<caption label="Dados"  />  
+			<grid>
+				<rows>
+					<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+					<row>Nível:<intbox id="nivel"/></row>
+					<row>Tipo de Usuário:<combobox id="tipoDeUsuario" style="background: #FFFFFF;" readonly="true"/></row>
+				</rows>
+			</grid>
+			<separator bar="true"></separator>
+			<div align="center">
+			
+			<button id="adicionar" label="Adicionar"/>
+			<button id="salvar" label="Salvar"/>
+			<button id="cancelar" label="Cancelar"/>
+			
+			</div>
+			</groupbox>
+
+	</div>
+
+		<div id="pesquisarPermissao" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<intbox id="ProcurarPermissao"/>
+					<button id="resultadoPermissao" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarPermissao" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Permissao"  />
+			<listbox id="ListagemPermissao" multiple="false" mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NivelCabeça" align="center" width="100px" label="Nivel" sort="auto" />
+							<listheader id="TipoDeUsuarioCabeça" align="center" width="100px" label="Tipo de Usuário" sort="auto" />
+															
+					</listhead>
+						
+					<listitem self="@{each=permissao}">
+					
+							<listcell label="@{permissao.id}"/>
+							<listcell label="@{permissao.nivel}"/>
+							<listcell label="@{permissao.tipoDeUsuario.descricao}"/>
+							
+					</listitem>
+					
+	    	</listbox>
+	    	</groupbox>
+		</div>
+							
+	</window>
+</zk>

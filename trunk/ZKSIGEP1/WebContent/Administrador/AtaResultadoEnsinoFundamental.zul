@@ -1,0 +1,50 @@
+<?page title="Registro de Disciplinas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexAtaResultadoFundamental"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexAtaResultadoFundamental" mode="overlapped" title="Ata de Resultados Finais do Ensino Fundamental" border="normal" 
+	height="100%" width="100%" apply="br.com.sigep.controller.AtaResultadoFundamentalController" 
+	closable="true" maximizable="true" minimizable="true" 
+	onClose="self.visible = false;  event.stopPropagation();">
+		
+	<div id="FiltroAvaliacao"  style="height:100%;width:1160px;position:absolute; margin: 20px 30px;">
+		<groupbox mold="3d">
+        	 <caption label="Filtro - Ata de Resultado Ensino Fundamental"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>Ano Letivo:<combobox id="anoLetivoCombo" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowNivel">Nível Escolar:<combobox id="nivelCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowSerie">Série:<combobox id="serieCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowTurma">Turma:<combobox id="turmaCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center"><button id="gerarPdf" label="Gerar Relatório" disabled="true"/></div>
+			
+		</groupbox>
+	
+	</div>
+	
+	<zscript>
+			<![CDATA[
+			 
+            anoLetivoCombo.getChildren().clear();
+	  	 	for (br.com.sigep.bean.AnoLetivo ano : br.com.sigep.facade.Facade.getInstance().listarAnoLetivo()) {
+				Comboitem comboitem = new Comboitem();
+				comboitem.setLabel("Ano - " + ano.getAno());
+				comboitem.setValue(ano);
+				anoLetivoCombo.appendChild(comboitem);
+		 	}
+
+       		]]>
+		</zscript>
+		
+</window>
+
+</zk>

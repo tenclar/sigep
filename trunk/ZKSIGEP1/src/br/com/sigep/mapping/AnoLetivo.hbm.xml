@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.com.sigep.bean">
+	<class name="AnoLetivo" lazy="true">
+		<id name="id" >
+			<generator class="native"></generator>
+			<!-- <param name="sequence">id_anoLetivo</param> Criar a sequence das tabelas -->
+		</id>
+		<property name="ano" />
+		<property name="dataInicio" />
+		<property name="dataFim" />
+	</class>
+</hibernate-mapping>

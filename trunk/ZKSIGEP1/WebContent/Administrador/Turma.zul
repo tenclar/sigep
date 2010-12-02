@@ -1,0 +1,94 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexTurma"?>
+<zk>
+	<window id="indexTurma" title="Cadastro de Turmas" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true" 
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.TurmaController"
+		onClose="self.visible = false;  event.stopPropagation();">
+
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarTurma" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarTurma" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarTurma" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarTurma" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarTurma" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+		<separator bar="true"/>
+
+	<div id="cadastroTurma" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d">
+         	<caption label="Dados"  />  
+			<grid>
+				<rows>
+					<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+					<row>Nome:<textbox id="nome" width="155px"/></row>
+					<row>Turno:<combobox id="turno" style="background: #FFFFFF;" readonly="true">
+							   <comboitem label="Matutino" value="Matutino"/>
+							   <comboitem label="Vespertino" value="Vespertino"/>
+							   <comboitem label="Noturno" value="Noturno"/></combobox></row>
+					<row>Modalidade:<textbox id="modalidade" width="155px"/></row>
+					<row>Qtd. de Alunos:<intbox id="qtdAluno"/></row>
+					<row>Ano Letivo:<combobox id="anoLetivo" style="background: #FFFFFF;" readonly="true"/></row>
+					<row>Sala:<combobox id="sala" style="background: #FFFFFF;" readonly="true"/></row>
+					<row>Série:<combobox id="serie" style="background: #FFFFFF;" readonly="true"/></row>
+				</rows>
+			</grid>
+			<separator bar="true"></separator>
+			<div align="center">
+			
+			<button id="adicionar" label="Adicionar"/>
+			<button id="salvar" label="Salvar"/>
+			<button id="cancelar" label="Cancelar"/>
+			
+			</div>
+			</groupbox>
+
+	</div>
+
+		<div id="pesquisarTurma" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarTurma"/>
+					<button id="resultadoTurma" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarTurma" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Turmas"  />
+			<listbox id="ListagemTurma" multiple="false" mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+							<listheader id="IdTurmaCabeça" align="center" label="Id" width="50px" />
+							<listheader id="QtdAlunoCabeça" align="center" width="100px" label="Nº de Alunos"  />
+							<listheader id="NomeTurmaCabeça" align="center" label="Nome" width="100px" />
+							<listheader id="TurnoCabeça" align="center" label="Turno" width="100px" />
+							<listheader id="ModalidadeCabeça" align="center" label="Modalidade" width="150px"/>
+							<listheader id="AnoLetivoCabeça" align="center" label="Ano" width="100px"/>
+							<listheader id="SalaCabeça" align="center" label="Sala" width="150px"/>
+							<listheader id="NivelEscolarTurmaCabeça" align="center" label="Nível Escolar" width="200px"/>
+							<listheader id="SerieTurmaCabeça" align="center" label="Serie" width="100px"/>
+					</listhead>
+
+					<listitem self="@{each=turma}" >
+							<listcell label="@{turma.id}"/>
+							<listcell label="@{turma.qtdAluno}"/>
+							<listcell label="@{turma.nome}"/>
+							<listcell label="@{turma.turno}"/>
+							<listcell label="@{turma.modalidade}"/>
+							<listcell label="@{turma.anoLetivo.ano}"/>
+							<listcell label="@{turma.sala.descricao}"/>
+							<listcell label="@{turma.serie.nivelEscolar.nivel}"/>
+							<listcell label="@{turma.serie.descricao}"/>
+					</listitem> 
+										
+	    	</listbox>
+	    	</groupbox>
+		</div>
+							
+	</window>
+</zk>

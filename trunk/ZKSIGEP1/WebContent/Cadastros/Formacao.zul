@@ -1,0 +1,160 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexFormacao"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexFormacao" title="Cadastro de Formação" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true"
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.FormacaoController"
+		onClose="self.visible = false;  event.stopPropagation();">
+		
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarFormacao" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarFormacao" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="EditarFormacao" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarFormacao" image="/img/deletar.png" tooltiptext="Excluir"/>
+		
+		</fisheyebar>
+		<separator bar="true"/>
+	
+		<div id="cadastroFormacao" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d" id="groupboxProcurarFuncionario" visible="false">
+        	<caption label="Procurar Funcionário"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>CPF do Funcionário:
+							<hbox>
+								<textbox id="cpfDoFuncionario" width="300px"/>
+								<button id="procurarDadosDoFuncionario" label="Buscar Funcionário"/>
+							</hbox>
+						</row>
+					</rows>
+					
+				</grid>
+			
+			</groupbox>
+	
+		<h:br /> 
+		
+		<groupbox mold="3d" id="groupboxIdentificacaoDoFuncionario" visible="false">
+        	<caption label="Funcionário"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+         				<row>Nome do Funcionário:<label id="nomeFuncionario" /></row>
+         				<row>Função:<label id="funcaoFuncionario" /></row>
+					</rows>
+					
+				</grid>
+			
+			</groupbox>
+	
+		<h:br /> 
+			
+		<groupbox mold="3d" id="groupboxFormacao" visible="false">
+           	<caption label="Formação"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />
+					</columns>
+					<rows>
+						<row>Título:<textbox id="titulo" width="300px"/></row>
+						<row id ="rowEspecializacao">Especialização:<textbox id="especializacao" width="300px"/></row>
+						<row>Curso:<textbox id="curso" width="300px"/></row>
+						<row>Instituição:<textbox id="instituicao" width="300px"/></row>
+						<row>Ano:<intbox id="ano" /></row>
+					</rows>
+				</grid>				
+				<separator bar="true"></separator>
+				
+				<div align="center">
+					<button id="adicionar" label="Adicionar"/>
+					<button id="salvar" label="Salvar"/>
+					<button id="cancelar" label="Cancelar"/>
+				</div>
+		</groupbox>
+
+		</div>
+		
+
+		<div id="janelaProcurarFormacao" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d" id="groupboxProcurarFuncionario2">
+        		<caption label="Procurar Funcionário"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />	
+						</columns>
+				
+						<rows>
+							<row>CPF do Funcionário:
+								<hbox>
+									<textbox id="cpfDoFuncionario2" width="300px"/>
+									<button id="procurarDadosDoFuncionario2" label="Buscar Funcionário"/>
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+			
+			</groupbox>
+	
+		<h:br /> 
+		
+			<groupbox mold="3d" id="groupboxIdentificacaoDoFuncionario2" visible="false">
+        		<caption label="Funcionário Encontrado"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />	
+						</columns>
+				
+						<rows>
+         					<row>Nome do Funcionário:<label id="nomeFuncionario2" /></row>
+         					<row>Função:<label id="funcaoFuncionario2" /></row>
+						</rows>
+					
+					</grid>
+			
+			</groupbox>
+	
+		<h:br /> 
+			
+		<groupbox mold="3d" id="groupboxListaDeFormacao" visible="false">
+         	<caption label="Formações do Funcionário"  />
+         		
+				<listbox id="ListagemFormacao" multiple="false">
+					<listhead sizable="true">
+						<listheader id="TituloFormacao" align="center" width="100px" label="Título" sort="auto" />
+						<listheader id="EspecializacaoFormacao" align="center" label="Especialização" sort="auto" />
+						<listheader id="CursoFormacao" align="center" width="100px" label="Curso" sort="auto" />
+						<listheader id="IntituicaoFormacao" align="center" width="100px" label="Instituição" sort="auto" />
+						<listheader id="AnoFormacao" align="center" width="100px" label="Ano" sort="auto" />
+								
+					</listhead>
+					
+					<listitem self="@{each=formacao}">
+						<listcell label="@{formacao.titulo}"/>
+						<listcell id="listcellEspecializacao" label="@{formacao.especializacao}"></listcell>
+						<listcell label="@{formacao.curso}"/>
+						<listcell label="@{formacao.instituicao}"/>
+						<listcell label="@{formacao.anoConclusao}"/>
+					</listitem>
+	    		</listbox>
+	    		
+		</groupbox>
+		
+	</div>
+							
+	</window>
+</zk>

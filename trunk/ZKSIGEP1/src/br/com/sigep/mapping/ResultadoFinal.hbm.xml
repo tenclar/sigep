@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.com.sigep.bean">
+	<class name="ResultadoFinal" lazy="true">
+		<id name="id" >
+			<generator class="native"></generator>
+			<!-- <param name="sequence">id_resultadoFinal</param> Criar a sequence das tabelas -->
+		</id>
+		<property name="totalFaltas" />
+		<property name="notaFinal" />
+		<property name="situacao" />
+		<property name="notaSemestre1" />
+		<property name="notaSemestre2"/>
+		<property name="notaRecuperacaoFinal"/>
+		<property name="notaResultadoAnual"/>
+		
+				
+		<many-to-one name="aluno" class="Aluno" />
+		<many-to-one name="registroDeDisciplina" class="RegistroDeDisciplina" />
+		
+		<map name="notasFinais" table="notas_parciais" >
+			<key column="id_resultado_final" />
+			<index column="etapa" type="string"/>
+			<element column="nota" type="float"/>
+		</map>
+		
+	</class>
+</hibernate-mapping>

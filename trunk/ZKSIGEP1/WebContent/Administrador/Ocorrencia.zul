@@ -1,0 +1,88 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexOcorrencia"?>
+<zk>
+	<window id="indexOcorrencia" title="Cadastro de Ocorrencia" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true" 
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.OcorrenciaController"
+		onClose="self.visible = false;  event.stopPropagation();">
+
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarOcorrencia" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarOcorrencia" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarOcorrencia" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarOcorrencia" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarOcorrencia" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+		<separator bar="true"/>
+
+	<div id="cadastroOcorrencia" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d">
+         	<caption label="Dados"  />  
+			<grid>
+				<rows>
+					<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>								
+					<row id="RowAnoLetivo">Ano Letivo:<combobox id="anoLetivo" style="background: #FFFFFF;" readonly="true"/></row>
+					<row id="RowNivel">Nível Escolar:<combobox id="nivel" style="background: #FFFFFF;" readonly="true"/></row>					
+					<row id="RowSerie">Série:<combobox id="serie" style="background: #FFFFFF;" readonly="true"/></row>					
+					<row id="RowTurma">Turma:<combobox id="turma" style="background: #FFFFFF;" readonly="true"/></row>		
+					<row id="RowAluno">Aluno:<combobox id="aluno" style="background: #FFFFFF;" readonly="true"/></row>				
+					<row>Data:<datebox id="data" /></row>
+					<row>Descrição:<textbox id="descricao" rows="5" width="450px"/></row>
+					<row>Punição:<textbox id="punicao" /></row>
+				</rows>
+			</grid>
+			<separator bar="true"></separator>
+			<div align="center">
+			
+			<button id="adicionar" label="Adicionar"/>
+			<button id="salvar" label="Salvar"/>
+			<button id="cancelar" label="Cancelar"/>
+			
+			</div>
+			</groupbox>
+
+	</div>
+
+		<div id="pesquisarOcorrencia" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarOcorrencia"/>
+					<button id="resultadoOcorrencia" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarOcorrencia" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Ocorrencias"  />
+			<listbox id="ListagemOcorrencia" multiple="false" mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeCabeça" align="center" width="200px" label="Aluno" sort="auto" />
+							<listheader id="DataCabeça" align="center" width="100px" label="Data" sort="auto" />
+							<listheader id="DecricaoCabeça" align="center" width="150px" label="Descrição" sort="auto" />
+							<listheader id="BlocoCabeça" align="center" width="150px" label="Punição" sort="auto" />
+								
+					</listhead>
+						
+						<listitem self="@{each=ocorrencia}">
+						
+							<listcell label="@{ocorrencia.id}"/>
+							<listcell label="@{ocorrencia.aluno.nome}"/>
+							<listcell label="@{ocorrencia.data}"/>
+							<listcell label="@{ocorrencia.descricao}"/>
+							<listcell label="@{ocorrencia.punicao}"/>
+							
+						</listitem>
+										
+	    	</listbox>
+	    	</groupbox>
+		</div>
+							
+	</window>
+</zk>

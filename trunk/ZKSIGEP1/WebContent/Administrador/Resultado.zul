@@ -1,0 +1,195 @@
+<?page title="Registro de Disciplinas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexResultado"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexResultado" mode="overlapped" title="Lista de Resultados" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.ResultadoController" closable="true" maximizable="true" minimizable="true" >
+
+	<div id="JanelaFiltroParaListarAvaliacao" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;">
+		<groupbox mold="3d" id="groupboxFiltro">
+        	 <caption label="Filtro - Listar Avaliação"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>Ano Letivo:<combobox id="anoLetivoCombo"/></row>
+						<row id="RowNivel">Nível Escolar:<combobox id="nivelCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowSerie">Série:<combobox id="serieCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowTurma">Turma:<combobox id="turmaCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowDisciplinaProfessor">Disciplina/Professor:<combobox id="disciplinaProfessorCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowPeriodo">Período:<combobox id="periodoCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowEtapa">Etapa:<combobox id="etapaCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center"><button id="listarAvaliacaoFiltro" label="Listar Avaliações"/></div>
+			
+		</groupbox>
+	
+	</div>
+	
+	<div id="janelaAvaliacao" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+	
+			<groupbox mold="3d" id="groupboxAvaliacao">
+         	<caption label="Lista de Avaliações"  />
+         			
+				<listbox id="ListagemAvaliacao" mold="paging" pageSize="10" tooltiptext="Selecione uma Linha para Adicionar Notas referente a essa Avaliação!">
+
+					<listhead sizable="true" >
+							<listheader id="IdTurmaCabeça" align="center" width="50px" label="Id"  />
+							<listheader id="DescricaoCabeça" align="center" width="250px" label="Descrição"  />
+							<listheader id="ProfCabeça" align="center" width="150px" label="Professor"  />
+							<listheader id="DiscCabeça" align="center" width="150px" label="Disciplina"  />
+							<listheader id="DataCabeça" align="center" width="100px" label="Data"  />
+							<listheader id="NotaCabeça" align="center" width="80px" label="Valor Total" />
+							<listheader id="PesoCabeça" align="center" width="80px" label="Peso"/>
+							<listheader id="PeriodoCabeça" align="center" width="100px" label="Período" />
+							<listheader id="EtapaCabeça" align="center" width="100px" label="Etapa"/>
+					</listhead>
+					
+					<listitem self="@{each=avaliacao}" >
+						<listcell label="@{avaliacao.id}"/>
+						<listcell label="@{avaliacao.descricao}"/>
+						<listcell label="@{avaliacao.registroDeDisciplina.professor.nome}"/>
+						<listcell label="@{avaliacao.registroDeDisciplina.disciplina.nome}"/>
+						<listcell label="@{avaliacao.data}"/>
+						<listcell label="@{avaliacao.valorTotal}"/>
+						<listcell label="@{avaliacao.peso}"/>
+						<listcell label="@{avaliacao.periodo}"/>
+						<listcell label="@{avaliacao.etapa}"/>
+					</listitem>  
+					
+	    		</listbox>
+		</groupbox>
+				
+	</div>
+	
+<div id="janelaAvaliacaoAluno" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+
+<tabbox>
+		<tabs align="center">
+			<tab label="Avaliação"></tab>
+			<tab label="Informações da Turma"></tab>
+			<tab label="Alunos"></tab>
+			<tab label="Notas"></tab>
+		</tabs>
+		
+		<tabpanels>
+			
+		<tabpanel>
+			<groupbox mold="3d">
+			
+         	<caption label="Dados sobre a Avaliação"  />
+         	
+         		<grid>
+         		
+         			<rows>
+         			
+         			<row>Id:<textbox id="id" disabled="true"/></row>
+         			<row>Disciplina:<label id="disciplina" /></row>
+         			<row>Professor:<label id="professor" /></row>
+					<row>Data:<label id="data" /></row>
+					<row>Valor Total:<label id="valorTotal"/></row>
+					<row>Peso:<label id="peso"/></row>
+					<row>Avaliação:<label id="avaliacao"/></row>
+					<row>Período:<label id="periodo" /></row>
+					<row>Etapa:<label id="etapa" /></row>
+					
+					</rows>
+				
+				</grid>
+				
+				<separator bar="true"></separator>
+				
+			</groupbox>
+			
+		</tabpanel>
+			
+			<tabpanel>
+				<groupbox mold="3d" >
+					<caption label="Dados da Turma" />
+						<grid>
+							<columns>
+								<column width="20%" />
+								<column />
+							</columns>
+							<rows>
+								<row>Nome:<label id="nomeTurma"  width="155px" /></row>
+								<row>Modalidade:<label id="modalidade" width="155px" /></row>
+								<row>Qtd. de Alunos:<label id="qtdAluno" /></row>
+								<row>Ano Letivo:<label id="anoLetivo" /></row>
+								<row>Nível Escolar:<label id="nivelEscolar" width="200px" /></row>
+								<row>Série:<label id="serie" width="200px" /></row>
+								<row>Turno:<label id="turno" /></row>
+								<row>Sala:<label id="sala" /></row>
+					       </rows>
+					      
+						</grid>
+				</groupbox>	
+			</tabpanel> 
+			
+			<tabpanel>
+				 <groupbox mold="3d">
+                    <caption label="Lista de Alunos"  />
+						
+					<listbox id="ListagemAluno" >
+						<listhead sizable="true">
+							<listheader id="MatriculaAlunoCabeça" align="center" width="50px" label="Matrícula" />
+							<listheader id="NomeAlunoCabeça" align="center" width="50px" label="Nome"/>	 		
+						</listhead>
+						
+	    			</listbox>
+							
+				</groupbox>  
+				
+			</tabpanel> 
+			
+		<tabpanel>
+				 
+				 <groupbox mold="3d">
+                    <caption label="Notas dos Alunos"  />
+						
+						<grid>
+							<rows id="rowNotas">
+							
+							</rows>
+						</grid>
+										<separator bar="true"></separator>
+					<div align="center"><button id="adicionarNotas" label="Adicionar"/></div>		
+				</groupbox>  
+				
+			</tabpanel> 
+			
+		</tabpanels>
+	</tabbox>
+	
+	<h:br/>
+	
+	<div align="center" id="center">
+		<button id="voltarPaginaListaAvaliacao" label="Listar Avaliação"/>	
+    </div>
+	
+</div>
+
+		<zscript>
+			<![CDATA[
+			 
+            anoLetivoCombo.getChildren().clear();
+	  	 	for (br.com.sigep.bean.AnoLetivo ano : br.com.sigep.facade.Facade.getInstance().listarAnoLetivo()) {
+				Comboitem comboitem = new Comboitem();
+				comboitem.setLabel("Ano - " + ano.getAno());
+				comboitem.setValue(ano);
+				anoLetivoCombo.appendChild(comboitem);
+		 	}
+
+       		]]>
+		</zscript>
+
+</window>
+
+
+</zk>

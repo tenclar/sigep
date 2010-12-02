@@ -1,0 +1,61 @@
+<?page title="SIGEP - Sistema Gerenciador de Escola Pública" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+
+	<image src="/img/planoDeFundo.jpg" width="100%" height="100%"/>
+	<window id="IndexLogin" mode="overlapped"  position="center" border="normal" height="600px" width="800px">
+	<!-- <caption image="/img/locked.png" /> -->
+	
+	<borderlayout>
+	
+	<north size="140px" border="none" >
+	<borderlayout>
+	<center  style=" background-image: URL(./img/Imagem1.jpg);">
+	<div id="logoSuperior" align="center" style=" background-image: URL(./img/Imagem1.jpg);">
+		<image src="/img/logoSigep.gif" width="700px" height="140px"/>
+	</div>
+	</center>
+	</borderlayout>
+	
+	</north>
+	
+	<center flex="true">
+	<borderlayout id="pesquisa">
+			
+			<center border="none" flex="true" style=" background-color: #F5F5F5;">
+				
+				<div id="divCenter">
+					<h:form id="f" name="f" action="j_spring_security_check" method="POST" xmlns:h="http://www.w3.org/1999/xhtml">
+					<image src="/img/Imagem11.png" align="center" width="400px" height="320px"  style="position:absolute; margin: 40px 180px;"/>
+					
+					<label id="u" value="Usuário:"  style="position:absolute;margin:180px 280px;color: #FFFFF;font-weight:bold;"/>
+					<textbox id="textLogin" name="j_username" style="position:absolute;margin:180px 340px;"/>
+					
+					<label id="p" value="Senha:" style="position:absolute;margin:210px 280px;color: #FFFFF;font-weight:bold;"/>
+					<textbox id="textSenha" type="password" name="j_password" style="position:absolute;margin:210px 340px;"/>
+					
+					<checkbox id="r" name="_spring_security_remember_me" style="position:absolute;margin:235px 290px;"/>
+					<label id="c" value="Manter-me Conectado " style="position:absolute;margin:238px 315px;"/>
+					
+					<h:input type="submit" value="Entrar" style="position:absolute;margin:260px 370px;"/>
+					
+					<div align="center" if="${param.error  != invalido}" style="position:absolute;margin:145px 280px;">
+				  	<image src="img/Close.png"/>	<label  style="color: #FFFFF;font-weight:bold;" value="Usuário ou Senha Inválido!"/>   
+				  	</div>
+				  	
+				  	</h:form>
+				</div>
+	    	</center>
+	</borderlayout>
+</center>
+
+	<south size="25px" border="normal" style=" background-color: #A2B5CD;">
+				<toolbar mold="panel" align="center">
+					Powered by <toolbarbutton label="Expert SI - Serviços Informatizados"/>
+				</toolbar>
+	</south>
+					
+	</borderlayout>		
+	
+	</window>
+</zk>

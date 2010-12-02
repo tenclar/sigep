@@ -1,0 +1,455 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexAluno"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexAluno" title="Cadastro de Alunos" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true" 
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.AlunoController"
+		onClose="self.visible = false;  event.stopPropagation();">
+
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+			
+			<fisheye id="CadastrarAluno" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarAluno" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarAluno" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarAluno" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarAluno" image="/img/deletar.png" tooltiptext="Excluir"/>
+			
+		</fisheyebar>
+		<separator bar="true"/>
+
+	<div id="FiltroAluno"  style="height:100%;width:1160px;position:absolute; margin: 20px 30px;"  visible="false">
+		<groupbox mold="3d" id="groupboxFiltro">
+        	 <caption label="Filtro - Aluno"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+					
+					<rows>
+						<row>Ano Letivo:<combobox id="anoLetivoCombo" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowNivel">Nível Escolar:<combobox id="nivelCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowFiltroSerie">Série:<combobox id="serieCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowFiltroTurma">Turma:<combobox id="turmaCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center">
+			<button id="listarAlunos" label="Listar Alunos" visible="false" disabled="true"/>
+			</div>
+			
+		</groupbox>
+	
+	</div>
+
+	<div id="cadastroAluno" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+		<tabbox panelSpacing="3">
+		<tabs>
+			<tab id="tabIdentificacao" label="Identificação do Aluno"></tab>
+			<tab label="Dados Familiares"></tab>
+			<tab label="Documentos"></tab>
+			<tab label="Endereço"></tab>
+			<tab label="Recomendações Médicas"></tab>
+			<tab id="tabMatricula" label="Matrícula"></tab>
+			<tab label="Foto"></tab>
+			<tab label="Login"></tab>
+			
+		</tabs>
+		
+		<tabpanels>
+			<tabpanel>
+				 <groupbox mold="3d">
+                    <caption label="Dados do Aluno"  />  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+							<column />
+						</columns>
+						<rows>
+							<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+							<row>Nome Completo:<textbox id="nome" width="500px"/></row>
+							<row>Sexo:<radiogroup id="sexo">
+										<radio label="Masculino" value="Masculino" id="masculino"/>
+										<radio label="Feminino" value="Feminino" id="feminino"/>
+									</radiogroup></row>
+							<row>Data de Nascimento:<datebox id="nascimento" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>Naturalidade:<textbox id="naturalidade" /></row>
+							<row>UF:<combobox cols="2" id="ufNascimento" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>Nacionalidade:<textbox id="nacionalidade"/></row>
+							<row>Etnia/Raça:<radiogroup id="etnia">
+										<radio label="Negra" value="Negra" id="negra"/>
+										<radio label="Branca" value="Branca" id="branca"/>
+										<radio label="Amarela" value="Amarela" id="amarela"/>
+										<radio label="Parda" value="Parda" id="parda"/>
+										<radio label="Indígena" value="Ingígena" id="indigena"/>
+									</radiogroup>
+							</row>
+							<row>Necessidades Especiais:<combobox id="necessidade" style="background: #FFFFFF;" readonly="true" width="230px">
+															<comboitem label="1 - DA - Deficiência Auditiva" value="DA - Deficiência Auditiva"/>
+															<comboitem label="2 - DM - Deficiência Múltipla" value="DM - Deficiência Múltipla"/>
+															<comboitem label="3 - DM - Deficiência Mental" value="DM - Deficiência Mental"/>
+															<comboitem label="4 - Síndrome" value="Síndrome"/>
+															<comboitem label="5 - DF - Deficiência Física" value="DF - Deficiência Física"/>
+															<comboitem label="6 - Condutas Típicas" value="Condutas Típicas"/>
+															<comboitem label="7 - DV - Deficiência Visual" value="DV - Deficiência Visual"/>
+															<comboitem label="8 - Altas Habilidades(Superdotado)" value="Altas Habilidades"/>
+														</combobox>
+							</row>
+						</rows>
+					</grid>		
+				</groupbox>  
+							
+			</tabpanel>  
+	
+			<tabpanel>
+				<groupbox mold="3d">
+                    <caption label="Responsáveis"  />  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Nome da Mãe:<textbox id="maeAluno" width="500px"/></row>
+							<row>Data de Nascimento (Mãe):<datebox  id="nascMae" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>Nome do Pai:<textbox id="paiAluno" width="500px"/></row>
+							<row>Data de Nascimento (Pai):<datebox  id="nascPai" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>Profissão:<textbox  id="profissao"/></row>
+						</rows>
+					</grid>
+				</groupbox>
+				
+				<h:br />  
+			
+				<groupbox mold="3d">
+                    <caption label="Legal"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Nome do Responsável:<textbox  id="responsavel" width="500px"/></row>
+							<row>Telefone:<textbox id="telefoneResponsavel"/></row>
+							<row>Ramal:<textbox id="ramalResponsavel" /></row>
+						</rows>
+					</grid>
+				</groupbox>
+			</tabpanel>
+			
+			<tabpanel>
+				<groupbox mold="3d">
+                    <caption label="Registro de Nascimento"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Número do Registro:<intbox id="numeroRegistro" /></row>
+							<row>Livro nº:<intbox id="numeroLivro" /></row>
+							<row>Nome do Cartório:<textbox id="nomeCartorio" /></row>
+							<row>Nome do Município:<textbox id="cidadeReg" /></row>
+							<row>UF:<combobox cols="2" id="ufReg" style="background: #FFFFFF;" readonly="true" /></row>
+						</rows>
+					</grid>
+				</groupbox>
+				
+				<h:br />  
+				
+				<groupbox mold="3d">
+                    <caption label="Identidade"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Número do RG:<intbox id="rg" /></row>
+							<row>Orgão Expedidor:<textbox id="orgExpedidor" /></row>
+							<row>UF:<combobox cols="2" id="ufOrgao" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>Data de Expedição:<datebox  id="rgExpedicao" style="background: #FFFFFF;" readonly="true"/></row>
+						</rows>
+					</grid>
+				</groupbox>
+				
+				<h:br />  
+				
+				<groupbox mold="3d">
+                    <caption label="CPF"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Número do CPF: <hbox>
+													<textbox id="cpf"/>
+													<image src="/img/atencao16.png"></image> 
+													<label height="100%" value ="Digite Somente os Números do CPF!"/>
+												</hbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				
+			</tabpanel>
+			
+			<tabpanel>
+			<groupbox mold="3d">
+                    <caption label="Residencial"  />  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Logradouro:<textbox  id="logradouro" width="550px"/></row>		
+							<row>Número:<intbox id="numero"/></row>
+							<row>Referência:<textbox  id="referencia"/></row>
+							<row>Bairro:<textbox  id="bairro"/></row>
+							<row>Município:<textbox  id="cidade"/></row>
+							<row>UF:<combobox cols="2" id="uf" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>CEP:<textbox id="cep"/></row>
+						</rows>
+					</grid>
+			</groupbox>
+			
+			<h:br />  
+			
+			<groupbox mold="3d">
+                    <caption label="Telefones"  />  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Tipo:<radiogroup id="tipoTelefone">
+										<radio label="Residencial" value="Residencial" id="residencial"/>
+										<radio label="Comercial" value="Comercial" id="comercial"/>
+										<radio label="Celular" value="Celular" id="celular"/>
+										<radio label="Recados" value="Recados" id="recados"/>
+									</radiogroup>
+							</row>
+							<row>Telefone:<textbox id="telefone" constraint="no negative,no zero"/></row>
+							<row>Ramal:<textbox id="ramalTelefone" width="100px"/></row>
+							<row>Email:<textbox id="email" width="300px"/></row>
+						</rows>
+					</grid>
+			</groupbox>
+			  
+			</tabpanel>
+						
+			<tabpanel>
+				<groupbox mold="3d">
+            	        <caption label="Informações"/>  
+						<grid>
+							<columns>
+								<column  width="20%"/>
+								<column />
+							</columns>
+							<rows>
+								<row>Descrição:<textbox id="descricao" rows="15" width="100%"/></row>
+							</rows>
+						</grid>
+					</groupbox>
+			</tabpanel>
+			
+			<tabpanel>
+			
+				<groupbox mold="3d">
+         			<caption label="Matrícula"  />  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />	
+						</columns>
+				
+						<rows>				
+							<row>Ano Letivo:<combobox id="anoLetivo" style="background: #FFFFFF;" readonly="true"/></row>			
+							<row>Nível Escolar:<combobox id="nivel" style="background: #FFFFFF;" readonly="true"/></row>			
+							<row id="RowSerie">Série:<combobox id="serie" style="background: #FFFFFF;" readonly="true" disabled="true"/></row>							
+							<row id="RowTurno">Turno:<combobox id="turno" style="background: #FFFFFF;" readonly="true" disabled="true">
+														<comboitem label="Matutino" value="Matutino"/>
+														<comboitem label="Vespertino" value="Vespertino"/>
+														<comboitem label="Noturno" value="Noturno"/>
+													</combobox>
+							</row>						
+							<row id="RowTurma">Turma:<combobox id="turma" style="background: #FFFFFF;" readonly="true" disabled="true"/></row>			
+							<row>Número:<textbox id="matricula"/></row>
+							<row>Código MEC:<intbox id="codigoMec"/></row>
+							<row>CRE:<intbox id="cre" /></row>
+						</rows>
+					</grid>
+						
+				</groupbox>
+			</tabpanel>
+			
+			<tabpanel>
+			<groupbox mold="3d">
+            	        <caption label="Foto do Aluno"/>  
+						<grid>
+							<columns>
+								<column/>
+								<column/>
+							</columns>
+							<rows>
+								<row  spans="2" align="center">
+									<vbox width="20%" align="center">
+										<image id="imageVideo" width="180px" height="200px" style="border: 5px solid #000;" />
+										<fileupload id="uploadImage" width="240px"/>
+									</vbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+			</tabpanel>		
+			<tabpanel>
+				<groupbox mold="3d">
+            	        <caption label="Usuário"/>  
+						<grid>
+							<columns>
+								<column  width="20%"/>
+								<column />
+							</columns>
+							<rows>
+								<row>Login:<textbox id="usuario" /></row>
+								<row>Senha:<textbox id="senha" /></row>
+								<row spans="3"></row>
+							</rows>
+						</grid>
+							<separator bar="true"></separator>
+								<div align="center">
+			
+									<button id="adicionar" label="Adicionar"/>
+									<button id="salvar" label="Salvar"/>
+									<button id="cancelar" label="Cancelar"/>
+			
+								</div>
+				</groupbox>
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+	
+	<h:br />  
+			
+
+	</div>
+
+		<div id="pesquisarAluno" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarAluno"/>
+					<button id="resultadoAluno" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarAluno" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Alunos"  />
+			<listbox id="ListagemAluno" multiple="false"	mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+							<listheader id="IdAluno" align="center" width="100px" label="Id"/>
+							<listheader id="NomeAluno" align="center" width="250px" label="Nome"  />
+							<listheader id="SexoAluno" align="center" label="Sexo" width="100px" />
+							<listheader id="NascimentoAluno" align="center" label="Nascimento" width="100px"/>
+							<listheader id="NaturalidadeAluno" align="center" label="Naturalidade" width="100px"/>
+							<listheader id="EstadoAluno" align="center" label="Uf" width="50px"/>
+							<listheader id="NacionalidadeAluno" align="center" label="Nacionalidade" width="100px"/>
+							<listheader id="EtniaAluno" align="center" label="Etnia" width="100px"/>
+							<listheader id="NecessidadeAluno" align="center" label="Necessidade" width="100px"/>
+							<listheader id="MaeAluno" align="center" label="Mãe" width="250px"/>
+							<listheader id="NascMaeAluno" align="center" label="Nascimento Mãe" width="250px"/>
+							<listheader id="PaiAluno" align="center" label="Pai" width="250px"/>
+							<listheader id="NascPaiAluno" align="center" label="Nascimento Pai" width="250px"/>
+							<listheader id="ProfissãoAluno" align="center" label="Profissão" width="250px"/>
+							<listheader id="ResponsavelAluno" align="center" label="Responsável" width="250px"/>
+							<listheader id="TelefoneResponsavelAluno" align="center" label="Tel. Responsável" width="250px"/>
+							<listheader id="RamalResponsavelAluno" align="center" label="Ramal Tel Responsável" width="250px"/>
+							<listheader id="RgAluno" align="center" label="Rg" width="100px"/>
+							<listheader id="ExpedidorAluno" align="center" label="Órgão Expedidor" width="150px"/>
+							<listheader id="UfRgAluno" align="center" label="Uf" width="50px"/>
+							<listheader id="DataRgExpedAluno" align="center" label="Dt. Expedição" width="100px"/>
+							<listheader id="RegistroAluno" align="center" label="Nº Registro" width="100px"/>
+							<listheader id="LivroRegistroAluno" align="center" label="Nº do Livro" width="100px"/>
+							<listheader id="NomeCartorioAluno" align="center" label="Cartório" width="150px"/>
+							<listheader id="CidadeRegistroAluno" align="center" label="Cidade" width="150px"/>
+							<listheader id="EstadoRegistroAluno" align="center" label="Estado" width="100px"/>
+							<listheader id="CpfAluno" align="center" label="CPF" width="100px"/>
+							<listheader id="RecomendacoesAluno" align="center" label="Recomendações Médicas" width="100px"/>
+							<listheader id="LogradouroAluno" align="center" label="Rua" width="150px"/>
+							<listheader id="NºAluno" align="center" label="Numero" width="80px"/>
+							<listheader id="ReferenciaAluno" align="center" label="Referência" width="100px"/>
+							<listheader id="BairroAluno" align="center" label="Bairro" width="100px"/>
+							<listheader id="MunicipioAluno" align="center" label="Cidade" width="100px"/>
+							<listheader id="UfMunicpioAluno" align="center" label="Estado" width="80px"/>
+							<listheader id="CepMunicpioAluno" align="center" label="Cep" width="80px"/>
+							<listheader id="TelefoneAluno" align="center" label="Telefone" width="100px"/>
+							<listheader id="TipoTelefoneAluno" align="center" label="Tipo de Telefone" width="150px"/>
+							<listheader id="RamalAluno" align="center" label="Ramal" width="100px"/>
+							<listheader id="EmailAluno" align="center" label="Email" width="200px"/>
+							<listheader id="LoginAluno" align="center" label="Login" width="100px"/>
+							<listheader id="SenhaAluno" align="center" label="Senha" width="100px"/>
+							<!-- <listheader id="BotaoAluno" align="center" label="Foto" width="100px"/> -->
+							
+					</listhead>
+
+					<listitem self="@{each=aluno}" >
+							<listcell label="@{aluno.id}"/>
+							<listcell label="@{aluno.nome}"/>
+							<listcell label="@{aluno.sexo}"/>
+							<listcell label="@{aluno.nascimento}"/>
+							<listcell label="@{aluno.naturalidade}"/>
+							<listcell label="@{aluno.ufNascimento}"/>
+							<listcell label="@{aluno.nacionalidade}"/>
+							<listcell label="@{aluno.etnia}"/>
+							<listcell label="@{aluno.necessidade}"/>
+							<listcell label="@{aluno.maeAluno}"/>
+							<listcell label="@{aluno.nascMae}"/>
+							<listcell label="@{aluno.paiAluno}"/>
+							<listcell label="@{aluno.nascPai}"/>
+							<listcell label="@{aluno.profissao}"/>
+							<listcell label="@{aluno.responsavel}"/>
+							<listcell label="@{aluno.telefoneResponsavel}"/>
+							<listcell label="@{aluno.ramalResponsavel}"/>
+							<listcell label="@{aluno.rg}"/>
+							<listcell label="@{aluno.orgExpedidor}"/>
+							<listcell label="@{aluno.ufOrgao}"/>
+							<listcell label="@{aluno.rgExpedicao}"/>
+							<listcell label="@{aluno.registro.numeroRegistro}"/>
+							<listcell label="@{aluno.registro.numeroLivro}"/>
+							<listcell label="@{aluno.registro.nomeCartorio}"/>
+							<listcell label="@{aluno.registro.cidadeReg}"/>
+							<listcell label="@{aluno.registro.ufReg}"/>
+							<listcell label="@{aluno.cpf}"/>
+							<listcell label="@{aluno.recomendacoesMedicas.descricao}"/>
+							<listcell label="@{aluno.endereco.logradouro}"/>
+							<listcell label="@{aluno.endereco.numero}"/>
+							<listcell label="@{aluno.endereco.referencia}"/>
+							<listcell label="@{aluno.endereco.bairro}"/>
+							<listcell label="@{aluno.endereco.cidade}"/>
+							<listcell label="@{aluno.endereco.uf}"/>
+							<listcell label="@{aluno.endereco.cep}"/>
+							<listcell label="@{aluno.tipoTelefone}"/>
+							<listcell label="@{aluno.telefone}"/>
+							<listcell label="@{aluno.ramalTelefone}"/>
+							<listcell label="@{aluno.email}"/>
+							<listcell label="@{aluno.usuario.usuario}"/>
+							<listcell label="@{aluno.usuario.senha}"/>
+							<!-- <listcell></listcell> -->
+							
+					</listitem> 
+										
+	    	</listbox>
+	    	</groupbox>
+		</div>
+				
+	</window>
+</zk>

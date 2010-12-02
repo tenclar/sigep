@@ -1,0 +1,155 @@
+<?page title="Renovação De Matrícula" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexRenovacaoDeMatricula"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexRenovacaoDeMatricula" mode="overlapped" title="Renovação de Matrícula" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.RenovacaoDeMatriculaController" closable="true" maximizable="true" minimizable="true" 
+	onClose="self.visible = false;  event.stopPropagation();">
+
+	<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+			
+			<fisheye id="RenovarMatricula" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarMatricula" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="EditarMatricula" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarMatricula" image="/img/deletar.png" tooltiptext="Excluir"/>
+			
+	</fisheyebar>
+	<separator bar="true"/>
+	
+	<div id="JanelaRenovarMatricula" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+		<groupbox mold="3d" id="groupboxProcurarAluno">
+        	 <caption label="Procurar Aluno"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>RG do Aluno:
+							<hbox>
+								<textbox id="rgDoAluno" width="300px"/>
+								<button id="procurarDadosDoAluno" label="Buscar Aluno"/>
+							</hbox>
+						</row>
+					</rows>
+					
+				</grid>
+			
+		</groupbox>
+	
+		<h:br />  
+			
+		<groupbox mold="3d" id="groupboxDadosDoAluno" visible="false">
+         	<caption label="Informações do Aluno - Ano Anterior"  />
+         			
+				<listbox id="ListagemDadosDoAluno" mold="paging" pageSize="10">
+
+					<listhead sizable="true" >
+							<listheader id="IdAlunoCabeça" align="center" width="10px" label="Id" />
+							<listheader id="NomeAlunoCabeça" align="center" width="50px" label="Nome"/>
+							<listheader id="AnoAnteriorCabeça" align="center" width="50px" label="Ano" />
+							<listheader id="NivelEscolarAnteriorCabeça" align="center" width="50px" label="Nível Escolar" />
+							<listheader id="SerieAnteriorCabeça" align="center" width="110px" label="Série"  />
+							<listheader id="TurnoAnteriorCabeça" align="center" width="110px" label="Turno"  />
+							<listheader id="TurmaAnteriorCabeça" align="center" width="50px" label="Turma"  />
+							<!-- listheader id="SituacaoAnteriorCabeça" align="center" width="50px" label="Situação"  />  -->
+							
+					</listhead>
+				
+	    		</listbox>
+		</groupbox>
+		
+		<h:br /> 
+		
+		<groupbox mold="3d" id="groupboxRenovarMatricula"  >
+					 <caption label="Renovar Matrícula"/>  
+						<grid>
+							<rows>
+								<row>Ano Letivo:<combobox id="anoLetivoCombo" selectedItem="@{indexRenovacaoDeMatriucla$composer.anoletivoObj}" style="background: #FFFFFF;" readonly="true"/></row>
+								<row id="RowNivel">Nível Escolar:<combobox id="nivelCombo" disabled="true" selectedItem="@{indexRenovacaoDeMatriucla$composer.ne1}" style="background: #FFFFFF;" readonly="true"/></row>
+								<row id="RowSerie">Série:<combobox id="serieCombo" disabled="true" selectedItem="@{indexRenovacaoDeMatriucla$composer.s}" style="background: #FFFFFF;" readonly="true"/></row>
+								<row id="RowTurno">Turno:<combobox id="turnoCombo" disabled="true" style="background: #FFFFFF;" readonly="true">
+															<comboitem label="Matutino" value="Matutino"/>
+															<comboitem label="Vespertino" value="Vespertino"/>
+															<comboitem label="Noturno" value="Noturno"/>													
+														</combobox>
+								</row>	
+								<row id="RowTurma">Turma:<combobox id="turmaCombo" disabled="true" selectedItem="@{indexRenovacaoDeMatriucla$composer.t}" style="background: #FFFFFF;" readonly="true"/></row>		
+								<row>Número:<textbox id="matricula"/></row>
+								<row>Código MEC:<intbox id="codigoMec"/></row>
+								<row>CRE:<intbox id="cre" /></row>								
+							</rows>
+						</grid>
+					
+					<separator bar="true"></separator>
+					<div align="center">
+						<button id="renovarMatricula" label="Renovar Matrícula"/>
+						<button id="salvarButton" label="Salvar"/>
+						<button id="cancelarButton" label="Cancelar"/>
+					</div>
+					
+			</groupbox>
+		
+	</div>	
+	
+	<div id="JanelaProcurarMatricula" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+		<groupbox mold="3d" id="groupboxProcurarAluno2">
+        	 <caption label="Procurar Aluno"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>RG do Aluno:
+							<hbox>
+								<textbox id="rgDoAluno2" width="300px"/>
+								<button id="procurarDadosDoAluno2" label="Buscar Aluno"/>
+							</hbox>
+						</row>
+					</rows>
+					
+				</grid>
+			
+		</groupbox>
+	
+		<h:br />  
+			
+		<groupbox mold="3d" id="groupboxDadosDoAluno2" visible="false">
+         	<caption label="Matrículas do Aluno"  />
+         			
+				<listbox id="ListagemDadosDoAluno2" mold="paging" pageSize="10">
+
+					<listhead sizable="true" >
+							<listheader id="NomeAlunoCabeça2" align="center" width="50px" label="Nome"/>
+							<listheader id="AnoAnteriorCabeça2" align="center" width="50px" label="Ano" />
+							<listheader id="NivelEscolarAnteriorCabeça2" align="center" width="50px" label="Nível Escolar" />
+							<listheader id="SerieAnteriorCabeça2" align="center" width="110px" label="Série"  />
+							<listheader id="TurnoAnteriorCabeça2" align="center" width="110px" label="Turno"  />
+							<listheader id="TurmaAnteriorCabeça2" align="center" width="50px" label="Turma"  />
+							<!-- listheader id="SituacaoAnteriorCabeça2" align="center" width="50px" label="Situação"  />  -->
+							
+					</listhead>
+				
+					<listitem self="@{each=matricula}">
+					
+							<listcell id="listcell" />
+							<listcell label="@{matricula.turma.anoLetivo.ano}" />
+							<listcell label="@{matricula.turma.serie.nivelEscolar.nivel}" />
+							<listcell label="@{matricula.turma.serie.descricao}" />
+							<listcell label="@{matricula.turma.turno}" />
+							<listcell label="@{matricula.turma.nome}" />
+															
+					</listitem>
+				
+	    		</listbox>
+		</groupbox>
+		
+	</div>
+
+</window>
+
+
+</zk>
