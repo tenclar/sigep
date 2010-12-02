@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.com.sigep.bean">
+	<class name="DadosFuncionais">
+		<id name="id" >
+			<generator class="native"></generator>
+			<!-- <param name="sequence">id_dadosFuncionais</param> Criar a sequence das tabelas -->
+		</id>
+		<property name="disciplinas" />
+		<property name="series" />
+		<property name="nivel" />
+		<property name="matricula1" />
+		<property name="dataAdmi1" />
+		<property name="matricula2" />
+		<property name="dataAdmi2" />
+		<property name="unidade" />
+		<many-to-one name="endereco" unique="true" class="Endereco" cascade="all" lazy="false"/>
+	</class>
+</hibernate-mapping>

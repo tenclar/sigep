@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CooperativaEducacional-Matrícula" language="groovy" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select p.*, a.*, e.*
+from pessoa p, aluno a, endereco e
+where p.endereco = e.id and p.id = a.pessoa_id and a.pessoa_id = 24]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="nascimento" class="java.sql.Timestamp"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="telefone" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="orgexpedidor" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="uforgao" class="java.lang.String"/>
+	<field name="nacionalidade" class="java.lang.String"/>
+	<field name="naturalidade" class="java.lang.String"/>
+	<field name="necessidade" class="java.lang.String"/>
+	<field name="ufnascimento" class="java.lang.String"/>
+	<field name="ramaltelefone" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.Integer"/>
+	<field name="rgexpedicao" class="java.sql.Timestamp"/>
+	<field name="usuario" class="java.lang.Long"/>
+	<field name="endereco" class="java.lang.Long"/>
+	<field name="pessoa_id" class="java.lang.Long"/>
+	<field name="paialuno" class="java.lang.String"/>
+	<field name="maealuno" class="java.lang.String"/>
+	<field name="tipotelefone" class="java.lang.String"/>
+	<field name="ramalresponsavel" class="java.lang.String"/>
+	<field name="nascmae" class="java.sql.Timestamp"/>
+	<field name="nascpai" class="java.sql.Timestamp"/>
+	<field name="profissao" class="java.lang.String"/>
+	<field name="responsavel" class="java.lang.String"/>
+	<field name="telefoneresponsavel" class="java.lang.String"/>
+	<field name="situacao" class="java.lang.String"/>
+	<field name="etnia" class="java.lang.String"/>
+	<field name="datacadastro" class="java.sql.Timestamp"/>
+	<field name="foto" class="java.lang.String"/>
+	<field name="recomendacoesmedicas" class="java.lang.Long"/>
+	<field name="registro" class="java.lang.Long"/>
+	<field name="logradouro" class="java.lang.String"/>
+	<field name="numero" class="java.lang.Integer"/>
+	<field name="cidade" class="java.lang.String"/>
+	<field name="uf" class="java.lang.String"/>
+	<field name="bairro" class="java.lang.String"/>
+	<field name="referencia" class="java.lang.String"/>
+	<field name="cep" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="937" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="572" height="937" forecolor="#336600"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="7" width="572" height="25" forecolor="#006600"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cooperativa Educacional de Xingó - COOPEX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="29" width="572" height="25" forecolor="#006600"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA["A melhor forma de educar, é ensinar a viver".]]></text>
+			</staticText>
+			<line>
+				<reportElement x="13" y="91" width="437" height="1" forecolor="#336600"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="92" width="437" height="20" forecolor="#336600"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[ESTABELECIMENTO DE ENSINO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="121" width="437" height="20" forecolor="#336600"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[ENDEREÇO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="13" y="120" width="437" height="1" forecolor="#336600"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="151" width="437" height="20" forecolor="#336600"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Ato, nº, data, orgão do Poder Público que autorizou ou reconheceu o funcionamento da Escola]]></text>
+			</staticText>
+			<line>
+				<reportElement x="13" y="150" width="437" height="1" forecolor="#336600"/>
+			</line>
+			<rectangle radius="10">
+				<reportElement x="13" y="183" width="548" height="173" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="31" y="176" width="174" height="20" forecolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="36" y="177" width="159" height="20" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[REQUERIMENTO DE MATRÍCULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="197" width="108" height="20" forecolor="#336600"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Requeiro a matrícula na]]></text>
+			</staticText>
+			<line>
+				<reportElement x="341" y="216" width="65" height="1" forecolor="#336600"/>
+			</line>
+			<staticText>
+				<reportElement x="406" y="197" width="73" height="20" forecolor="#336600"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[série do ensino]]></text>
+			</staticText>
+			<line>
+				<reportElement x="476" y="216" width="75" height="1" forecolor="#336600"/>
+			</line>
+			<staticText>
+				<reportElement x="100" y="218" width="451" height="32" forecolor="#336600"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[                 Declaro aceitar as disposições expressas no Regimento deste Estabelecimento de Ensino, responsabilizando-me pela autenticidade dos documentos entregues com este requerimento.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="322" width="250" height="20" forecolor="#336600"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Assinatura do pai ou responsável]]></text>
+			</staticText>
+			<line>
+				<reportElement x="301" y="321" width="250" height="1" forecolor="#336600"/>
+			</line>
+			<staticText>
+				<reportElement x="367" y="274" width="16" height="20" forecolor="#336600"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[,de]]></text>
+			</staticText>
+			<line>
+				<reportElement x="384" y="293" width="97" height="1" forecolor="#336600"/>
+			</line>
+			<staticText>
+				<reportElement x="483" y="274" width="27" height="20" forecolor="#336600"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[de 20]]></text>
+			</staticText>
+			<line>
+				<reportElement x="510" y="292" width="41" height="1" forecolor="#336600"/>
+			</line>
+			<line>
+				<reportElement x="268" y="292" width="97" height="1" forecolor="#336600"/>
+			</line>
+			<rectangle radius="10">
+				<reportElement x="13" y="368" width="548" height="353" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="31" y="361" width="164" height="20" forecolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="36" y="362" width="159" height="20" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[DADOS PESSOAIS DO ALUNO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="31" y="417" width="520" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="31" y="450" width="392" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="435" y="450" width="116" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="31" y="484" width="53" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="91" y="484" width="102" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="200" y="484" width="108" height="23" forecolor="#336600"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="93" y="484" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Data de Nascimento]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="315" y="484" width="108" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="430" y="484" width="121" height="23" forecolor="#336600"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="484" width="53" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="484" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Naturalidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="484" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Nacionalidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="484" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ End. Eletrônico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="417" width="53" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="450" width="108" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Endereço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="450" width="53" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Telefone]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="31" y="518" width="520" height="23" forecolor="#336600"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="518" width="221" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Nome do Pai ou Responsável]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="31" y="552" width="121" height="23" forecolor="#336600"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="552" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Profissão]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="165" y="552" width="121" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="298" y="552" width="121" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="430" y="552" width="121" height="23" forecolor="#336600"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="167" y="552" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Local de Trabalho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="552" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="552" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ CPF]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="31" y="620" width="121" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="298" y="620" width="121" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="31" y="586" width="520" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="430" y="620" width="121" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="165" y="620" width="121" height="23" forecolor="#336600"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="586" width="221" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Nome da Mãe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="620" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Profissão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="620" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Local de Trabalho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="620" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="620" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ CPF]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="239" y="657" width="102" height="23" forecolor="#336600"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="241" y="657" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="352" y="657" width="199" height="23" forecolor="#336600"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="352" y="657" width="101" height="13" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ Funcionário]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="13" y="734" width="548" height="187" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="31" y="731" width="136" height="20" forecolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="34" y="729" width="159" height="20" forecolor="#336600"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESERVADO À DIRETORIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="791" width="16" height="20" forecolor="#336600"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[,de]]></text>
+			</staticText>
+			<line>
+				<reportElement x="336" y="810" width="97" height="1" forecolor="#336600"/>
+			</line>
+			<staticText>
+				<reportElement x="435" y="791" width="27" height="20" forecolor="#336600"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[de 20]]></text>
+			</staticText>
+			<line>
+				<reportElement x="462" y="809" width="41" height="1" forecolor="#336600"/>
+			</line>
+			<line>
+				<reportElement x="220" y="809" width="97" height="1" forecolor="#336600"/>
+			</line>
+			<rectangle>
+				<reportElement x="113" y="768" width="26" height="23" forecolor="#336600"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="113" y="809" width="26" height="23" forecolor="#336600"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="49" y="768" width="64" height="23" forecolor="#336600"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deferido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="809" width="64" height="23" forecolor="#336600"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indeferido]]></text>
+			</staticText>
+			<line>
+				<reportElement x="31" y="863" width="221" height="1" forecolor="#336600"/>
+			</line>
+			<line>
+				<reportElement x="330" y="862" width="221" height="1" forecolor="#336600"/>
+			</line>
+			<staticText>
+				<reportElement x="31" y="864" width="221" height="20" forecolor="#336600"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Secretário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="864" width="221" height="20" forecolor="#336600"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Diretor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="884" width="53" height="20" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Registro nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="884" width="54" height="20" forecolor="#336600"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Registro nº]]></text>
+			</staticText>
+			<line>
+				<reportElement x="84" y="898" width="116" height="1" forecolor="#336600"/>
+			</line>
+			<line>
+				<reportElement x="384" y="896" width="116" height="1" forecolor="#336600"/>
+			</line>
+			<rectangle>
+				<reportElement x="468" y="25" width="93" height="146" forecolor="#336600"/>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

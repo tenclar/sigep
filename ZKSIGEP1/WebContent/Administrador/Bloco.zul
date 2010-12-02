@@ -1,0 +1,78 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexBloco"?>
+<zk>
+	<window id="indexBloco" title="Cadastro de Bloco" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true"
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.BlocoController"
+		onClose="self.visible = false;  event.stopPropagation();">
+		
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarBloco" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarBloco" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarBloco" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarBloco" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarBloco" image="/img/deletar.png" tooltiptext="Excluir"/>
+		
+		</fisheyebar>
+		<separator bar="true"/>
+	
+	<div id="cadastroBloco" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d">
+         	<caption label="Dados"  />  
+			<grid>
+				<rows>
+					<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+					<row>Nome:<textbox id="nome" /></row>
+					<row>Quantidade de Salas:<intbox id="qtdSala"/></row>
+				</rows>
+			</grid>
+			<separator bar="true"></separator>
+			<div align="center">
+			
+			<button id="adicionar" label="Adicionar"/>
+			<button id="salvar" label="Salvar"/>
+			<button id="cancelar" label="Cancelar"/>
+			
+			</div>
+			</groupbox>
+
+	</div>
+
+		<div id="pesquisarBloco" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarBloco"/>
+					<button id="resultadoBloco" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarBloco" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Blocos"  />
+			<listbox id="ListagemBloco" multiple="false" mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeCabeça" align="center" width="100px" label="Nome" sort="auto" />
+							<listheader id="QtdCabeça" align="center" width="100px" label="Quantidade de Sala" sort="auto" />
+															
+					</listhead>
+						
+					<listitem self="@{each=bloco}">
+					
+							<listcell label="@{bloco.id}" />
+							<listcell label="@{bloco.nome}"/>
+							<listcell label="@{bloco.qtdSala}"/>
+							
+					</listitem>
+					
+	    	</listbox>
+	    	</groupbox>
+		</div>
+							
+	</window>
+</zk>

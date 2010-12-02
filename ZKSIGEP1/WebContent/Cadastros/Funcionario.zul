@@ -1,0 +1,453 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexFuncionario"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+ 	
+	<window id="indexFuncionario" title="Cadastro de Funcionários" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true" 
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.FuncionarioController"
+		onClose="self.visible = false;  event.stopPropagation();">
+		
+		 <attribute name="onCreate">
+            String command = "applyPhoneMask('"+telefone.getUuid()+"')";
+            Clients.evalJavaScript(command);
+       	</attribute> 
+ 
+            
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarFuncionario" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarFuncionario" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarFuncionario" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarFuncionario" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarFuncionario" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+		<separator bar="true"/>
+
+	<div id="cadastroFuncionario" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<tabbox>
+		<tabs>
+			<tab id="tabIdentificacao" label="Identificação do Funcionário"></tab>
+			<tab label="Documentos"></tab>
+			<tab label="Endereço"></tab>
+			<tab label="Dados Bancários"/>
+			<tab id="tabFormacao" label="Formação"></tab>			
+			<tab id="tabVinculo" label="Outros Vínculos"></tab>
+			<tab label="Login"></tab>
+		</tabs>
+		
+		<tabpanels>
+			<tabpanel>
+				 <groupbox mold="3d">
+                    <caption label="Dados do Funcionário"  />  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+							<row>Nome Completo:<textbox id="nome" width="500px"/></row>
+							<row>Função:<textbox id="funcao" width="300px"/></row>
+							<row>Sexo:<radiogroup id="sexo">
+										<radio id="masculino" label="Masculino" value="Masculino"/>
+										<radio id="feminino" label="Feminino" value="Feminino"/>
+									</radiogroup></row>
+							<row>Estado Civil:<combobox id="estadoCivil" style="background: #FFFFFF;" readonly="true">
+															<comboitem label="Solteiro" value="Solteiro(a)"/>
+															<comboitem label="Casado(a)" value="Casado(a)"/>
+															<comboitem label="Divorciado(a)" value="Divorciado(a)"/>
+															<comboitem label="Viúvo(a)" value="Viúvo(a)"/>
+											  </combobox>
+							</row>
+							<row>Data de Nascimento:<datebox id="nascimento" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>Naturalidade:<textbox id="naturalidade" /></row>
+							<row>UF:<combobox cols="2" id="ufNascimento" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>Nacionalidade:<textbox id="nacionalidade" /></row>
+							<row>Necessidades Especiais:<combobox id="necessidade" style="background: #FFFFFF;" readonly="true" width="230px">
+															<comboitem label="1 - DA - Deficiência Auditiva" value="DA - Deficiência Auditiva"/>
+															<comboitem label="2 - DM - Deficiência Múltipla" value="DM - Deficiência Múltipla"/>
+															<comboitem label="3 - DM - Deficiência Mental" value="DM - Deficiência Mental"/>
+															<comboitem label="4 - Síndrome" value="Síndrome"/>
+															<comboitem label="5 - DF - Deficiência Física" value="DF - Deficiência Física"/>
+															<comboitem label="6 - Condutas Típicas" value="Condutas Típicas"/>
+															<comboitem label="7 - DV - Deficiência Visual" value="DV - Deficiência Visual"/>
+															<comboitem label="8 - Altas Habilidades(Superdotado)" value="Altas Habilidades"/>
+														</combobox>
+							</row>							
+						</rows>
+					</grid>		
+				</groupbox>  
+
+				<h:br />
+				<groupbox mold="3d">
+                    <caption label="Dados Familiares"  />  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Nome da Mãe:<textbox id="maeFunc" width="500px"/></row>
+							<row>Nome do Pai:<textbox id="paiFunc" width="500px"/></row>
+						</rows>
+					</grid>
+				</groupbox>
+
+			</tabpanel> 
+			
+			<tabpanel>
+							
+				<groupbox mold="3d">
+                    <caption label="Identidade"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Número do RG:<intbox id="rg"/></row>
+							<row>Orgão Expedidor:<textbox id="orgExpedidor" /></row>
+							<row>UF:<combobox cols="2" id="ufOrgao" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>Data de Expedição:<datebox  id="rgExpedicao" style="background: #FFFFFF;" readonly="true"/></row>
+							<row>PIS/PASEP:<textbox id="pisPasep"/></row>
+						</rows>
+					</grid>
+				</groupbox>
+				
+				<h:br />  
+				
+				<groupbox mold="3d">
+                    <caption label="CPF"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Número do CPF: <hbox>
+													<textbox id="cpf"/>
+													<image src="/img/atencao16.png"></image> 
+													<label height="100%" value ="Digite Somente os Números do CPF!"/>
+												</hbox></row>
+						</rows>
+					</grid>
+				</groupbox>
+				
+				<h:br />
+				
+				<groupbox mold="3d">
+                    <caption label="Título Eleitoral"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Número do Título:<intbox id="tituloEleitoral"/></row>
+							<row>Zona:<intbox id="zona" /></row>
+							<row>Seção:<intbox id="secao"/></row>
+						</rows>
+					</grid>
+				</groupbox>
+				
+				<h:br />  
+				
+				<groupbox mold="3d">
+                    <caption label="Reservista"/>  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Número da Reservista:<textbox id="reservista" /></row>
+							<row>Série:<textbox id="serie" /></row>
+							<row>Categoria:<textbox id="categoria" /></row>
+							<zscript></zscript>
+						</rows>
+					</grid>
+				</groupbox>
+				
+			</tabpanel> 
+	
+			<tabpanel>
+				<groupbox mold="3d">
+                    <caption label="Residencial"  />  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Logradouro:<textbox  id="logradouro" width="550px"/></row>		
+							<row>Número:<intbox id="numero" /></row>
+							<row>Referência:<textbox  id="referencia" /></row>
+							<row>Bairro:<textbox  id="bairro" /></row>
+							<row>Município:<textbox  id="cidade" /></row>
+							<row>UF:<combobox cols="2" id="uf" style="background: #FFFFFF;" readonly="true"></combobox></row>
+							<row>CEP:<textbox id="cep" /></row>
+						</rows>
+					</grid>
+				</groupbox>
+			
+			<h:br />  
+						
+				<groupbox mold="3d">
+                    <caption label="Telefone"  />  
+					<grid>
+						<columns>
+							<column  width="20%"/>
+							<column />
+						</columns>
+						<rows>
+							<row>Telefone:<textbox id="telefone"/></row>
+							<row>Ramal:<textbox id="ramalTelefone" width="100px"/></row>
+							<row>Celular:<textbox  id="celular" /></row>
+							<row>Fax:<textbox  id="fax" /></row>							
+							<row>Email:<textbox id="email" width="300px"/></row>
+						</rows>
+					</grid>
+				</groupbox>
+			</tabpanel>
+			
+			<tabpanel>
+				<groupbox mold="3d">
+            	        <caption label="Conta"/>  
+						<grid>
+							<columns>
+								<column  width="20%"/>
+								<column />
+							</columns>
+							<rows>
+								<row>Nome do Banco:<textbox id="banco" /></row>
+								<row>Número da Conta:<textbox id="conta" /></row>
+								<row>Número da Agência:<textbox id="agencia" /></row>
+								<row>Operação:<textbox id="operacao" /></row>
+							</rows>
+						</grid>
+				</groupbox>
+			</tabpanel>
+			
+			<tabpanel>
+				<groupbox mold="3d" id="Formacao">
+            	        <caption label="Formação"/>  
+						<grid>
+							<columns>
+								<column  width="20%"/>
+								<column />
+							</columns>
+							<rows>
+								<row>Título:<textbox id="titulo" width="300px"/></row>
+								<row>Curso:<textbox id="curso" width="300px"/></row>
+								<row>Instituição:<textbox id="instituicao" width="300px"/></row>
+								<row>Ano:<intbox id="ano" /></row>
+								</rows>
+								</grid>
+								<separator bar="true" />
+								<div align="center">			
+									<button id="adicionarFormacao" label="Adicionar"/>
+								</div>							
+						<h:br />
+						<listbox id="ListagemFormacao" multiple="false">
+						<listhead sizable="true">
+
+							<listheader id="TituloFormacao" align="center" width="100px" label="Título" sort="auto" />
+							<listheader id="CursoFormacao" align="center" width="100px" label="Curso" sort="auto" />
+							<listheader id="IntituicaoFormacao" align="center" width="100px" label="Instituição" sort="auto" />
+							<listheader id="AnoFormacao" align="center" width="100px" label="Ano" sort="auto" />
+								
+						</listhead>
+						
+						<listitem self="@{each=formacao}">
+							<listcell label="@{formacao.titulo}"/>
+							<listcell label="@{formacao.curso}"/>
+							<listcell label="@{formacao.instituicao}"/>
+							<listcell label="@{formacao.anoConclusao}"/>
+						</listitem>
+	    		</listbox>
+						
+				</groupbox>
+			</tabpanel>
+			
+			<tabpanel>
+				<groupbox mold="3d" id="OutrosVinculos">
+            	        <caption label="Outros Vínculos"/>  
+						<grid>
+							<columns>
+								<column  width="20%"/>
+								<column />
+							</columns>
+							<rows>
+								<row>Cargo:<textbox id="cargo" width="300px"/></row>
+								<row>Órgão:<textbox id="orgao" width="300px"/></row>
+								<row>Carga Horária:<intbox id="cargaHoraria" /></row>
+								</rows>
+								</grid>
+								<separator bar="true" />
+								<div align="center">			
+									<button id="adicionarVinculo" label="Adicionar"/>
+								</div>							
+						<h:br />
+						<listbox id="ListagemVinculo" multiple="false">
+						<listhead sizable="true">
+
+							<listheader id="CargoCabeça" align="center" width="100px" label="Cargo" sort="auto" />
+							<listheader id="OrgaoCabeça" align="center" width="100px" label="Órgão" sort="auto" />
+							<listheader id="CargaCabeça" align="center" width="100px" label="Carga Horária" sort="auto" />
+								
+						</listhead>
+						
+						<listitem self="@{each=vinculos}">
+							<listcell label="@{vinculos.cargo}"/>
+							<listcell label="@{vinculos.orgao}"/>
+							<listcell label="@{vinculos.cargaHoraria}"/>
+						</listitem>
+	    		</listbox>
+						
+				</groupbox>
+			</tabpanel>
+			
+			<tabpanel>
+				<groupbox mold="3d">
+            	        <caption label="Usuário"/>  
+						<grid>
+							<columns>
+								<column  width="20%"/>
+								<column />
+							</columns>
+							<rows>
+								<row>Login:<textbox id="usuario"/></row>
+								<row>Senha:<textbox id="senha" /></row>
+							</rows>
+						</grid>
+							<separator bar="true"></separator>
+								<div align="center">
+			
+									<button id="adicionar" label="Adicionar"/>
+									<button id="salvar" label="Salvar"/>
+									<button id="cancelar" label="Cancelar"/>
+			
+								</div>
+				</groupbox>
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+	
+	<h:br />  
+			
+
+	</div>
+
+		<div id="pesquisarFuncionario" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarFuncionario"/>
+					<button id="resultadoFuncionario" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarFuncionario" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Funcionários"  />
+			<listbox id="ListagemFuncionario" multiple="false"	mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+							<listheader id="IdFuncionario" align="center" width="100px" label="Id"/>
+							<listheader id="NomeFuncionario" align="center" width="250px" label="Nome"  />
+							<listheader id="FuncaoFuncionario" align="center" label="Função" width="150px" />
+							<listheader id="SexoFuncionario" align="center" label="Sexo" width="100px" />
+							<listheader id="EstadoCivilFuncionario" align="center" label="Estado Civil" width="100px"/>
+							<listheader id="NascimentoFuncionario" align="center" label="Nascimento" width="100px"/>
+							<listheader id="NaturalidadeFuncionario" align="center" label="Naturalidade" width="100px"/>
+							<listheader id="EstadoFuncionario" align="center" label="Uf" width="50px"/>
+							<listheader id="NacionalidadeFuncionario" align="center" label="Nacionalidade" width="100px"/>
+							<listheader id="NecessidadeFuncionario" align="center" label="Necessidade" width="100px"/>
+							<listheader id="MaeFuncionario" align="center" label="Mãe" width="250px"/>
+							<listheader id="PaiFuncionario" align="center" label="Pai" width="250px"/>
+							<listheader id="RgFuncionario" align="center" label="Rg" width="100px"/>
+							<listheader id="ExpedidorFuncionario" align="center" label="Órgão Expedidor" width="150px"/>
+							<listheader id="UfRgFuncionario" align="center" label="Uf" width="50px"/>
+							<listheader id="DataFuncionario" align="center" label="Dt. Expedição" width="100px"/>
+							<listheader id="PisPasepFuncionario" align="center" label="Pis/Pasep" width="100px"/>
+							<listheader id="CpfFuncionario" align="center" label="CPF" width="100px"/>
+							<listheader id="TituloEleitoralFuncionario" align="center" label="Título Eleitoral" width="100px"/>
+							<listheader id="ZonaEleitoralFuncionario" align="center" label="Zona Eleitoral" width="100px"/>
+							<listheader id="SecaoEleitoralFuncionario" align="center" label="Seção Eleitoral" width="100px"/>
+							<listheader id="ReservistaFuncionario" align="center" label="Reservista" width="100px"/>
+							<listheader id="SérieFuncionario" align="center" label="Serie" width="70px"/>
+							<listheader id="CategoriaFuncionario" align="center" label="Categoria" width="100px"/>
+							<listheader id="LogradouroFuncionario" align="center" label="Rua" width="150px"/>
+							<listheader id="NºFuncionario" align="center" label="Numero" width="80px"/>
+							<listheader id="ReferenciaFuncionario" align="center" label="Referência" width="100px"/>
+							<listheader id="BairroFuncionario" align="center" label="Bairro" width="100px"/>
+							<listheader id="MunicipioFuncionario" align="center" label="Cidade" width="100px"/>
+							<listheader id="UfMunicpioFuncionario" align="center" label="Estado" width="80px"/>
+							<listheader id="TelefoneFuncionario" align="center" label="Telefone" width="100px"/>
+							<listheader id="RamalFuncionario" align="center" label="Ramal" width="100px"/>
+							<listheader id="CelularFuncionario" align="center" label="Celular" width="100px"/>
+							<listheader id="FAxFuncionario" align="center" label="Fax" width="100px"/>
+							<listheader id="EmailFuncionario" align="center" label="Email" width="200px"/>
+							<listheader id="BancoFuncionario" align="center" label="Banco" width="100px"/>
+							<listheader id="ContaFuncionario" align="center" label="Conta" width="100px"/>
+							<listheader id="AgenciaFuncionario" align="center" label="Agência" width="100px"/>
+							<listheader id="OperaçãoFuncionario" align="center" label="Operação" width="100px"/>
+							<listheader id="LoginFuncionario" align="center" label="Login" width="100px"/>
+							<listheader id="SenhaFuncionario" align="center" label="Senha" width="100px"/>
+							
+					</listhead>
+
+					<listitem self="@{each=funcionario}" >
+							<listcell label="@{funcionario.id}"/>
+							<listcell label="@{funcionario.nome}"/>
+							<listcell label="@{funcionario.funcao}"/>
+							<listcell label="@{funcionario.sexo}"/>
+							<listcell label="@{funcionario.estadoCivil}"/>
+							<listcell label="@{funcionario.nascimento}"/>
+							<listcell label="@{funcionario.naturalidade}"/>
+							<listcell label="@{funcionario.ufNascimento}"/>
+							<listcell label="@{funcionario.nacionalidade}"/>
+							<listcell label="@{funcionario.necessidade}"/>
+							<listcell label="@{funcionario.maeFunc}"/>
+							<listcell label="@{funcionario.paiFunc}"/>
+							<listcell label="@{funcionario.rg}"/>
+							<listcell label="@{funcionario.orgExpedidor}"/>
+							<listcell label="@{funcionario.ufOrgao}"/>
+							<listcell label="@{funcionario.rgExpedicao}"/>
+							<listcell label="@{funcionario.pisPasep}"/>
+							<listcell label="@{funcionario.cpf}"/>
+							<listcell label="@{funcionario.tituloEleitoral}"/>
+							<listcell label="@{funcionario.zonaEleitoral}"/>
+							<listcell label="@{funcionario.secaoEleitoral}"/>
+							<listcell label="@{funcionario.reservista}"/>
+							<listcell label="@{funcionario.serie}"/>
+							<listcell label="@{funcionario.categoria}"/>
+							<listcell label="@{funcionario.endereco.logradouro}"/>
+							<listcell label="@{funcionario.endereco.numero}"/>
+							<listcell label="@{funcionario.endereco.referencia}"/>
+							<listcell label="@{funcionario.endereco.bairro}"/>
+							<listcell label="@{funcionario.endereco.cidade}"/>
+							<listcell label="@{funcionario.endereco.uf}"/>
+							<listcell label="@{funcionario.telefone}"/>
+							<listcell label="@{funcionario.ramalTelefone}"/>
+							<listcell label="@{funcionario.celular}"/>
+							<listcell label="@{funcionario.fax}"/>
+							<listcell label="@{funcionario.email}"/>
+							<listcell label="@{funcionario.dadosBancarios.banco}"/>
+							<listcell label="@{funcionario.dadosBancarios.conta}"/>
+							<listcell label="@{funcionario.dadosBancarios.agencia}"/>
+							<listcell label="@{funcionario.dadosBancarios.operacao}"/>
+							<listcell label="@{funcionario.usuario.usuario}"/>
+							<listcell label="@{funcionario.usuario.senha}"/>
+					</listitem> 
+										
+	    	</listbox>
+	    	</groupbox>
+		</div>
+				
+	</window>
+</zk>

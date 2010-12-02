@@ -1,0 +1,194 @@
+<?page title="Registro de Disciplinas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexRegistroDeDisciplina"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexRegistroDeDisciplina" mode="overlapped" title="Lista de Turmas" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.RegistroDeDisciplinaController" closable="true" maximizable="true" minimizable="true" >
+
+	<div id="JanelaFiltroParaListarTurma" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;">
+		<groupbox mold="3d" id="groupboxFiltro">
+        	 <caption label="Filtro - Listar Turma"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>Ano Letivo:<combobox id="anoLetivoCombo" selectedItem="@{indexRegistroDeDisciplina$composer.anoletivoObj}" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowNivel">Nível Escolar:<combobox id="nivelCombo" disabled="true" selectedItem="@{indexRegistroDeDisciplina$composer.ne1}" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowSerie">Série:<combobox id="serieCombo" disabled="true" selectedItem="@{indexRegistroDeDisciplina$composer.s}" style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center"><button id="listarTurmaFiltro" label="Listar Turmas"/></div>
+			
+		</groupbox>
+	
+	</div>
+	
+	<div id="JanelaDisciplina" visible="false" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;">
+			
+		<groupbox mold="3d" id="groupboxTurma">
+         	<caption label="Lista de Turmas"  />
+         			
+				<listbox id="ListagemTurma" mold="paging" pageSize="10" tooltiptext="Selecione uma Linha para Realizar o Registro de Disciplina referente a essa Turma!">
+
+					<listhead sizable="true" >
+							<listheader id="IdTurmaCabeça" align="center" width="30px" label="Id"  />
+							<listheader id="QtdAlunoCabeça" align="center" width="110px" label="Qtd. de Alunos"  />
+							<listheader id="NomeTurmaCabeça" align="center" width="50px" label="Nome"  />
+							<listheader id="TurnoCabeça" align="center" width="50px" label="Turno" />
+							<listheader id="ModalidadeCabeça" align="center" width="50px" label="Modalidade"/>
+							<listheader id="AnoLetivoCabeça" align="center" width="100px" label="Ano Letivo" />
+							<listheader id="SalaCabeça" align="center" width="50px" label="Sala"/>
+							<listheader id="NivelEscolarTurmaCabeça" align="center" width="50px" label="Nível Escolar" />
+							<listheader id="SerieTurmaCabeça" align="center" width="50px" label="Serie" />
+					</listhead>
+					
+					<listitem self="@{each=turma}" >
+						<listcell label="@{turma.id}"/>
+						<listcell label="@{turma.qtdAluno}"/>
+						<listcell label="@{turma.nome}"/>
+						<listcell label="@{turma.turno}"/>
+						<listcell label="@{turma.modalidade}"/>
+						<listcell label="@{turma.anoLetivo.ano}"/>
+						<listcell label="@{turma.sala.descricao}"/>
+						<listcell label="@{turma.serie.nivelEscolar.nivel}"/>
+						<listcell label="@{turma.serie.descricao}"/>
+					</listitem>  
+					
+	    		</listbox>
+		</groupbox>
+		
+	</div>	
+	
+<div id="janelaDisciplinaProfessor" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+
+<tabbox>
+		<tabs align="center">
+			<tab label="Disciplina"></tab>
+			<tab label="Informações da Turma"></tab>
+			<tab label="Alunos"></tab>
+		</tabs>
+		
+		<tabpanels>
+			<tabpanel>
+				 <groupbox mold="3d" id="groupboxDisciplina">
+                    <caption label="Disciplinas"  />  
+						
+					<listbox id="ListagemDisciplina" mold="paging" pageSize="10" >
+						<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeCabeça" align="center" width="100px" label="Nome" sort="auto" />
+							<listheader id="CargaHorariaCabeça" align="center" width="100px" label="Carga Horária" sort="auto" />
+							<listheader id="NivelEscolarCabeça" align="center" width="50px" label="Nível Escolar" />
+							<listheader id="SerieCabeça" align="center" width="100px" label="Série" sort="auto" />
+							<listheader id="TurmaCabeça" align="center" width="100px" label="Turma" sort="auto" />
+							<listheader id="TurnoTurmaCabeça" align="center" width="100px" label="Turma" sort="auto" />
+							<listheader id="ProfessorCabeça" align="center" width="100px" label="Professor" sort="auto" />
+								
+						</listhead>
+						
+						<listitem self="@{each=registroDeDisciplina}">
+							<listcell label="@{registroDeDisciplina.disciplina.id}"/>
+							<listcell label="@{registroDeDisciplina.disciplina.nome}"/>
+							<listcell label="@{registroDeDisciplina.disciplina.cargaHoraria}"/>
+							<listcell label="@{registroDeDisciplina.disciplina.serie.nivelEscolar.nivel}"/>
+							<listcell label="@{registroDeDisciplina.disciplina.serie.descricao}"/>
+							<listcell label="@{registroDeDisciplina.turma.nome}"/>
+							<listcell label="@{registroDeDisciplina.turma.turno}"/>
+							<listcell label="@{registroDeDisciplina.professor.nome}"/>
+						</listitem>
+	    			</listbox>
+							
+				</groupbox>  
+				
+				<h:br/>
+				
+				<groupbox mold="3d" id="VerRegistroDisciplinaProfessor" >
+					 <caption label="Disciplina/Professor"/>  
+						<grid>
+							<rows>
+								<row>Disciplina:<textbox id="disciplina" disabled="true"/></row>
+								<row>Professor:<combobox id="professor" style="background: #FFFFFF;" readonly="true"/></row>
+							</rows>
+						</grid>
+					
+					<separator bar="true"></separator>
+					<div align="center"><button id="adicionar" label="Adicionar"/></div>
+					
+				</groupbox>
+			</tabpanel> 
+			
+			
+			<tabpanel>
+				<groupbox mold="3d" >
+					<caption label="Dados" />
+						<grid>
+							<columns>
+								<column width="20%" />
+								<column />
+							</columns>
+							<rows>
+								<row>Nome:<textbox disabled="true" id="nomeTurma"  width="155px" /></row>
+								<row>Modalidade:<textbox disabled="true" id="modalidade" width="155px" /></row>
+								<row>Qtd. de Alunos:<intbox disabled="true" id="qtdAluno" /></row>
+								<row>Ano Letivo:<textbox disabled="true" id="anoLetivo" /></row>
+								<row>Nível Escolar:<textbox disabled="true" id="nivelEscolar" width="200px" /></row>
+								<row>Série:<textbox disabled="true" id="serie" width="200px" /></row>
+								<row>Turno:<textbox disabled="true"  id="turno" /></row>
+								<row>Sala:<textbox disabled="true" id="sala" /></row>
+					       </rows>
+					      
+						</grid>
+				</groupbox>	
+			</tabpanel> 
+			
+			<tabpanel>
+				 <groupbox mold="3d">
+                    <caption label="Alunos"  />
+						
+					<listbox id="ListagemAluno" >
+						<listhead sizable="true">
+							<listheader id="MatriculaAlunoCabeça" align="center" width="50px" label="Matrícula" />
+							<listheader id="NomeAlunoCabeça" align="center" width="50px" label="Nome"/>	 		
+						</listhead>
+						
+	    			</listbox>
+							
+				</groupbox>  
+				
+			</tabpanel> 
+			
+		</tabpanels>
+	</tabbox>
+	
+	<h:br/>
+	
+	<div align="center" id="center">
+		<button id="voltarPaginaListaTurma" label="Listar Turma"/>	
+    </div>
+	
+</div>
+
+		<zscript>
+			<![CDATA[
+			 
+            anoLetivoCombo.getChildren().clear();
+	  	 	for (br.com.sigep.bean.AnoLetivo ano : br.com.sigep.facade.Facade.getInstance().listarAnoLetivo()) {
+				Comboitem comboitem = new Comboitem();
+				comboitem.setLabel("Ano - " + ano.getAno());
+				comboitem.setValue(ano);
+				anoLetivoCombo.appendChild(comboitem);
+		 	}
+
+       		]]>
+		</zscript>
+
+</window>
+
+
+</zk>

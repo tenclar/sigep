@@ -1,0 +1,122 @@
+<?page title="Registro de Disciplinas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexAvaliacao"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexAvaliacao" mode="overlapped" title="Cadastro de Avaliações" border="normal" 
+	height="100%" width="100%" apply="br.com.sigep.controller.AvaliacaoController" 
+	closable="true" maximizable="true" minimizable="true" >
+
+	<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarAvaliacao" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarAvaliacao" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarAvaliacao" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarAvaliacao" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarAvaliacao" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+	<separator bar="true"/>
+		
+	<div id="FiltroAvaliacao"  style="height:100%;width:1160px;position:absolute; margin: 20px 30px;"  visible="false">
+		<groupbox mold="3d" id="groupboxFiltro">
+        	 <caption label="Filtro - Avaliação"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>Ano Letivo:<combobox id="anoLetivoCombo"/></row>
+						<row id="RowNivel">Nível Escolar:<combobox id="nivelCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowSerie">Série:<combobox id="serieCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowTurma">Turma:<combobox id="turmaCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowDisciplinaProfessor">Disciplina/Professor:<combobox id="disciplinaProfessorCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center"><button id="avancar" label="Avançar" visible="false" disabled="true"/>
+			<button id="listarRegistro" label="Listar Avaliações" visible="false" disabled="true"/></div>
+			
+		</groupbox>
+	
+	</div>
+	
+	<div id="pesquisarAvaliacao" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarAvaliacao"/>
+					<button id="resultadoAvaliacao" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+	
+	<div id="cadastroAvaliacao" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			
+		<groupbox mold="3d" id="groupboxTurma">
+         	<caption label="Cadastro de Avaliação"  />
+         		<grid>
+         			<rows>
+         			<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+         			<row>Disciplina:<label id="disciplina" /></row>
+         			<row>Professor:<label id="professor" /></row>
+					<row>Data:<datebox id="data" style="background: #FFFFFF;" readonly="true"/></row>
+					<row>Valor Total:<textbox id="valorTotal"/></row>
+					<row>Peso:<textbox id="peso"/></row>
+					<row>Descrição:<textbox id="descricao" rows="3" width="450px"/></row>
+					<row>Período:<combobox id="periodo" style="background: #FFFFFF;" readonly="true"/></row>
+					<row>Etapa:<combobox id="etapa" style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+				</grid>
+				<separator bar="true"></separator>
+				<div align="center"><button id="adicionar" label="Adicionar"/>
+				<button id="salvar" label="Salvar"/>
+				<button id="cancelar" label="Cancelar"/></div>
+		</groupbox>
+		
+	</div>	
+	
+	<div id="JanelaAvaliacao" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;" visible="false">
+			
+		<groupbox mold="3d">
+         	<caption label="Lista de Avaliações"  />
+         			
+				<listbox id="ListagemAvaliacao" mold="paging" pageSize="10" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+
+					<listhead sizable="true" >
+							<listheader id="IdTurmaCabeça" align="center" width="50px" label="Id"  />
+							<listheader id="DescricaoCabeça" align="center" width="250px" label="Descrição"  />
+							<listheader id="DataCabeça" align="center" width="100px" label="Data"  />
+							<listheader id="DisciplinaCabeça" align="center" width="150px" label="Disciplina"/>
+							<listheader id="ProfessorCabeça" align="center" width="150px" label="Professor" />
+							<listheader id="TurmaCabeça" align="center" width="150px" label="Turma" />
+							<listheader id="SerieTurmaCabeça" align="center" width="100px" label="Serie" />
+							<listheader id="ValorCabeça" align="center" width="80px" label="Valor" />
+							<listheader id="PesoCabeça" align="center" width="80px" label="Peso" />
+							<listheader id="EtapaCabeça" align="center" width="100px" label="Etapa" />
+							<listheader id="PeriodoCabeça" align="center" width="100px" label="Periodo" />
+					</listhead>
+					
+					<listitem self="@{each=avaliacao}" >
+						<listcell label="@{avaliacao.id}"/>
+						<listcell label="@{avaliacao.descricao}"/>
+						<listcell label="@{avaliacao.data}"/>
+						<listcell label="@{avaliacao.registroDeDisciplina.disciplina.nome}"/>
+						<listcell label="@{avaliacao.registroDeDisciplina.professor.nome}"/>
+						<listcell label="@{avaliacao.registroDeDisciplina.turma.nome}"/>
+						<listcell label="@{avaliacao.registroDeDisciplina.turma.serie.descricao}"/>
+						<listcell label="@{avaliacao.valorTotal}"/>
+						<listcell label="@{avaliacao.peso}"/>
+						<listcell label="@{avaliacao.etapa}"/>
+						<listcell label="@{avaliacao.periodo}"/>
+					</listitem>  
+					
+	    		</listbox>
+		</groupbox>
+		
+	</div>
+
+</window>
+
+
+</zk>

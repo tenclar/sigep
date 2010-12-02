@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"><value>org.postgresql.Driver</value></property>
+		<property name="url"><value>jdbc:postgresql://localhost:5432/zksigep</value></property>
+		<property name="username"><value>sigep</value></property>
+		<property name="password"><value>1234</value></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>br/com/sigep/mapping/ResultadoFinal.hbm.xml</value>
+				<value>br/com/sigep/mapping/OutrosVinculos.hbm.xml</value>
+				<value>br/com/sigep/mapping/Avaliacao.hbm.xml</value>
+				<value>br/com/sigep/mapping/Aluno.hbm.xml</value>
+				<value>br/com/sigep/mapping/Bloco.hbm.xml</value>
+				<value>br/com/sigep/mapping/Permissao.hbm.xml</value>
+				<value>br/com/sigep/mapping/Ocorrencia.hbm.xml</value>
+				<value>br/com/sigep/mapping/Endereco.hbm.xml</value>
+				<value>br/com/sigep/mapping/Serie.hbm.xml</value>
+				<value>br/com/sigep/mapping/Disciplina.hbm.xml</value>
+				<value>br/com/sigep/mapping/AnoLetivo.hbm.xml</value>
+				<value>br/com/sigep/mapping/Professor.hbm.xml</value>
+				<value>br/com/sigep/mapping/Matricula.hbm.xml</value>
+				<value>br/com/sigep/mapping/Resultado.hbm.xml</value>
+				<value>br/com/sigep/mapping/Registro.hbm.xml</value>
+				<value>br/com/sigep/mapping/Afastamento.hbm.xml</value>  
+				<value>br/com/sigep/mapping/Sala.hbm.xml</value>
+				<value>br/com/sigep/mapping/Turma.hbm.xml</value>
+				<value>br/com/sigep/mapping/Formacao.hbm.xml</value>
+				<value>br/com/sigep/mapping/RecomendacoesMedicas.hbm.xml</value>
+				<value>br/com/sigep/mapping/Frequencia.hbm.xml</value>
+				<value>br/com/sigep/mapping/Usuario.hbm.xml</value>
+				<value>br/com/sigep/mapping/DadosFuncionais.hbm.xml</value>
+				<value>br/com/sigep/mapping/Funcionario.hbm.xml</value>
+				<value>br/com/sigep/mapping/TipoDeUsuario.hbm.xml</value>
+				<value>br/com/sigep/mapping/RegistroDeAula.hbm.xml</value>
+				<value>br/com/sigep/mapping/DadosBancarios.hbm.xml</value>
+				<value>br/com/sigep/mapping/Pessoa.hbm.xml</value>
+				<value>br/com/sigep/mapping/RegistroDeDisciplina.hbm.xml</value>
+				<value>br/com/sigep/mapping/NivelEscolar.hbm.xml</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+
+	
+	<bean id="ResultadoFinalDao" class="br.com.sigep.dao.ResultadoFinalDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="ResultadoFinalBlo" class="br.com.sigep.blo.ResultadoFinalBlo">
+    	<property name="dao"><ref local="ResultadoFinalDao" /></property>
+    </bean>
+
+	<bean id="OutrosVinculosDao" class="br.com.sigep.dao.OutrosVinculosDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="OutrosVinculosBlo" class="br.com.sigep.blo.OutrosVinculosBlo">
+    	<property name="dao"><ref local="OutrosVinculosDao" /></property>
+    </bean>
+
+	<bean id="AvaliacaoDao" class="br.com.sigep.dao.AvaliacaoDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="AvaliacaoBlo" class="br.com.sigep.blo.AvaliacaoBlo">
+    	<property name="dao"><ref local="AvaliacaoDao" /></property>
+    </bean>
+
+	<bean id="AlunoDao" class="br.com.sigep.dao.AlunoDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="AlunoBlo" class="br.com.sigep.blo.AlunoBlo">
+    	<property name="dao"><ref local="AlunoDao" /></property>
+    </bean>
+
+	<bean id="BlocoDao" class="br.com.sigep.dao.BlocoDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="BlocoBlo" class="br.com.sigep.blo.BlocoBlo">
+    	<property name="dao"><ref local="BlocoDao" /></property>
+    </bean>
+
+	<bean id="PermissaoDao" class="br.com.sigep.dao.PermissaoDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="PermissaoBlo" class="br.com.sigep.blo.PermissaoBlo">
+    	<property name="dao"><ref local="PermissaoDao" /></property>
+    </bean>
+
+	<bean id="OcorrenciaDao" class="br.com.sigep.dao.OcorrenciaDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="OcorrenciaBlo" class="br.com.sigep.blo.OcorrenciaBlo">
+    	<property name="dao"><ref local="OcorrenciaDao" /></property>
+    </bean>
+
+	<bean id="SerieDao" class="br.com.sigep.dao.SerieDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="SerieBlo" class="br.com.sigep.blo.SerieBlo">
+    	<property name="dao"><ref local="SerieDao" /></property>
+    </bean>
+
+	<bean id="DisciplinaDao" class="br.com.sigep.dao.DisciplinaDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="DisciplinaBlo" class="br.com.sigep.blo.DisciplinaBlo">
+    	<property name="dao"><ref local="DisciplinaDao" /></property>
+    </bean>
+
+	<bean id="AnoLetivoDao" class="br.com.sigep.dao.AnoLetivoDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="AnoLetivoBlo" class="br.com.sigep.blo.AnoLetivoBlo">
+    	<property name="dao"><ref local="AnoLetivoDao" /></property>
+    </bean>
+
+	<bean id="ProfessorDao" class="br.com.sigep.dao.ProfessorDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="ProfessorBlo" class="br.com.sigep.blo.ProfessorBlo">
+    	<property name="dao"><ref local="ProfessorDao" /></property>
+    </bean>
+
+	<bean id="MatriculaDao" class="br.com.sigep.dao.MatriculaDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="MatriculaBlo" class="br.com.sigep.blo.MatriculaBlo">
+    	<property name="dao"><ref local="MatriculaDao" /></property>
+    </bean>
+
+	<bean id="ResultadoDao" class="br.com.sigep.dao.ResultadoDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="ResultadoBlo" class="br.com.sigep.blo.ResultadoBlo">
+    	<property name="dao"><ref local="ResultadoDao" /></property>
+    </bean>
+
+	<bean id="RegistroDao" class="br.com.sigep.dao.RegistroDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="RegistroBlo" class="br.com.sigep.blo.RegistroBlo">
+    	<property name="dao"><ref local="RegistroDao" /></property>
+    </bean>
+
+	<bean id="AfastamentoDao" class="br.com.sigep.dao.AfastamentoDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="AfastamentoBlo" class="br.com.sigep.blo.AfastamentoBlo">
+    	<property name="dao"><ref local="AfastamentoDao" /></property>
+    </bean>
+
+	<bean id="SalaDao" class="br.com.sigep.dao.SalaDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="SalaBlo" class="br.com.sigep.blo.SalaBlo">
+    	<property name="dao"><ref local="SalaDao" /></property>
+    </bean>
+
+	<bean id="TurmaDao" class="br.com.sigep.dao.TurmaDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="TurmaBlo" class="br.com.sigep.blo.TurmaBlo">
+    	<property name="dao"><ref local="TurmaDao" /></property>
+    </bean>
+ 
+	<bean id="FormacaoDao" class="br.com.sigep.dao.FormacaoDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="FormacaoBlo" class="br.com.sigep.blo.FormacaoBlo">
+    	<property name="dao"><ref local="FormacaoDao" /></property>
+    </bean>
+
+	<bean id="RecomendacoesMedicasDao" class="br.com.sigep.dao.RecomendacoesMedicasDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="RecomendacoesMedicasBlo" class="br.com.sigep.blo.RecomendacoesMedicasBlo">
+    	<property name="dao"><ref local="RecomendacoesMedicasDao" /></property>
+    </bean>
+
+	<bean id="FrequenciaDao" class="br.com.sigep.dao.FrequenciaDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="FrequenciaBlo" class="br.com.sigep.blo.FrequenciaBlo">
+    	<property name="dao"><ref local="FrequenciaDao" /></property>
+    </bean>
+
+	<bean id="UsuarioDao" class="br.com.sigep.dao.UsuarioDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="UsuarioBlo" class="br.com.sigep.blo.UsuarioBlo">
+    	<property name="dao"><ref local="UsuarioDao" /></property>
+    </bean>
+
+	<bean id="DadosFuncionaisDao" class="br.com.sigep.dao.DadosFuncionaisDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="DadosFuncionaisBlo" class="br.com.sigep.blo.DadosFuncionaisBlo">
+    	<property name="dao"><ref local="DadosFuncionaisDao" /></property>
+    </bean>
+
+	<bean id="FuncionarioDao" class="br.com.sigep.dao.FuncionarioDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="FuncionarioBlo" class="br.com.sigep.blo.FuncionarioBlo">
+    	<property name="dao"><ref local="FuncionarioDao" /></property>
+    </bean>
+
+	<bean id="TipoDeUsuarioDao" class="br.com.sigep.dao.TipoDeUsuarioDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="TipoDeUsuarioBlo" class="br.com.sigep.blo.TipoDeUsuarioBlo">
+    	<property name="dao"><ref local="TipoDeUsuarioDao" /></property>
+    </bean>
+
+	<bean id="RegistroDeAulaDao" class="br.com.sigep.dao.RegistroDeAulaDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="RegistroDeAulaBlo" class="br.com.sigep.blo.RegistroDeAulaBlo">
+    	<property name="dao"><ref local="RegistroDeAulaDao" /></property>
+    </bean>
+
+	<bean id="DadosBancariosDao" class="br.com.sigep.dao.DadosBancariosDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="DadosBancariosBlo" class="br.com.sigep.blo.DadosBancariosBlo">
+    	<property name="dao"><ref local="DadosBancariosDao" /></property>
+    </bean>
+
+	<bean id="RegistroDeDisciplinaDao" class="br.com.sigep.dao.RegistroDeDisciplinaDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="RegistroDeDisciplinaBlo" class="br.com.sigep.blo.RegistroDeDisciplinaBlo">
+    	<property name="dao"><ref local="RegistroDeDisciplinaDao" /></property>
+    </bean>
+	
+	<bean id="NivelEscolarDao" class="br.com.sigep.dao.NivelEscolarDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+    
+    <bean id="NivelEscolarBlo" class="br.com.sigep.blo.NivelEscolarBlo">
+    	<property name="dao"><ref local="NivelEscolarDao" /></property>
+    </bean>
+	
+	<bean id="Facade" class="br.com.sigep.facade.Facade">
+		<property name="resultadoFinalBlo"><ref local="ResultadoFinalBlo" /></property>
+		<property name="outrosVinculosBlo"><ref local="OutrosVinculosBlo" /></property>
+		<property name="avaliacaoBlo"><ref local="AvaliacaoBlo" /></property>
+		<property name="alunoBlo"><ref local="AlunoBlo" /></property>
+		<property name="blocoBlo"><ref local="BlocoBlo" /></property>
+		<property name="permissaoBlo"><ref local="PermissaoBlo" /></property>
+		<property name="ocorrenciaBlo"><ref local="OcorrenciaBlo" /></property>
+		<property name="serieBlo"><ref local="SerieBlo" /></property>
+		<property name="disciplinaBlo"><ref local="DisciplinaBlo" /></property>
+		<property name="anoLetivoBlo"><ref local="AnoLetivoBlo" /></property>
+		<property name="professorBlo"><ref local="ProfessorBlo" /></property>
+		<property name="matriculaBlo"><ref local="MatriculaBlo" /></property>
+		<property name="resultadoBlo"><ref local="ResultadoBlo" /></property>
+		<property name="registroBlo"><ref local="RegistroBlo" /></property>
+		<property name="afastamentoBlo"><ref local="AfastamentoBlo" /></property>
+		<property name="salaBlo"><ref local="SalaBlo" /></property>
+		<property name="turmaBlo"><ref local="TurmaBlo" /></property>
+		<property name="formacaoBlo"><ref local="FormacaoBlo" /></property>
+		<property name="recomendacoesMedicasBlo"><ref local="RecomendacoesMedicasBlo" /></property>
+		<property name="frequenciaBlo"><ref local="FrequenciaBlo" /></property>
+		<property name="usuarioBlo"><ref local="UsuarioBlo" /></property>
+		<property name="dadosFuncionaisBlo"><ref local="DadosFuncionaisBlo" /></property>
+		<property name="funcionarioBlo"><ref local="FuncionarioBlo" /></property>
+		<property name="tipoDeUsuarioBlo"><ref local="TipoDeUsuarioBlo" /></property>
+		<property name="registroDeAulaBlo"><ref local="RegistroDeAulaBlo" /></property>
+		<property name="dadosBancariosBlo"><ref local="DadosBancariosBlo" /></property>
+		<property name="registroDeDisciplinaBlo"><ref local="RegistroDeDisciplinaBlo" /></property>
+		 <property name="nivelEscolarBlo"><ref local="NivelEscolarBlo" /></property>
+	</bean>
+</beans>

@@ -1,0 +1,122 @@
+<?page title="Cadastro de Funcionário" language="xul/html" ?>  
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"  >
+	
+<window id="janelaDisciplinaProfessor" title="Junção Disciplina/Professor" border="normal" width="100%"
+ apply="br.com.sigep.controller.DisciplinaController">
+
+<tabbox>
+		<tabs align="center">
+			<tab label="Disciplina"></tab>
+			<tab label="Informações da Turma"></tab>
+			<tab label="Alunos"></tab>
+		</tabs>
+		
+		<tabpanels>
+			<tabpanel>
+				 <groupbox mold="3d">
+                    <caption label="Disciplinas"  />  
+						
+					<listbox id="ListagemDisciplina" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemDisciplina$composer.getInstance.listarDisciplina}"
+						mold="paging" pageSize="10" selectedItem="@{janelaDisciplinaProfessor$composer.selected}">
+						<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeCabeça" align="center" width="100px" label="Nome" sort="auto" />
+							<listheader id="CargaHorariaCabeça" align="center" width="100px" label="Carga Horária" sort="auto" />
+							<listheader id="SerieCabeça" align="center" width="100px" label="Série" sort="auto" />
+								
+						</listhead>
+						
+						<listitem self="@{each=disciplina}">
+							<listcell label="@{disciplina.id}"/>
+							<listcell label="@{disciplina.nome}"/>
+							<listcell label="@{disciplina.cargaHoraria}"/>
+							<listcell label="@{disciplina.serie.descricao}"/>
+						</listitem>
+	    			</listbox>
+							
+				</groupbox>  
+				
+				<h:br/>
+				
+				<groupbox mold="3d" id="VerRegistroDisciplinaProfessor">
+					 <caption label="Disciplina/Professor"/>  
+						<grid>
+							<rows>
+								<row>Disciplina:<textbox id="nome" disabled="true"  value="@{janelaDisciplinaProfessor$composer.selected.nome}"/></row>
+								<row>Professor:<combobox id="professor"  /></row>
+							</rows>
+						</grid>
+					
+					<separator bar="true"></separator>
+					<div align="center"><button id="adicionar" label="Adicionar"/></div>
+					
+				</groupbox>
+			</tabpanel> 
+			
+			
+			<tabpanel>
+				<groupbox mold="3d">
+					<caption label="Dados" />
+						<grid>
+							<columns>
+								<column width="20%" />
+								<column />
+							</columns>
+							<rows>
+								<row>Nome:<textbox id="nomeTurma" value="@{janelaTurma$composer.t.nome}" width="155px" /></row>
+								<row>Turno:<textbox id="turno" value="@{janelaTurma$composer.t.turno}"/></row>
+								<row>Modalidade:<textbox id="modalidade" value="@{janelaTurma$composer.t.modalidade}" width="155px" /></row>
+								<row>Qtd. de Alunos:<intbox id="qtdAluno" value="@{janelaTurma$composer.t.qtdAluno}" /></row>
+								<row>Ano Letivo:<textbox id="anoLetivo"	value="@{janelaTurma$composer.t.anoLetivo}" /></row>
+								<row>Sala:<textbox id="sala" value="@{janelaTurma$composer.t.sala}" /></row>
+								<row>Série:<textbox id="serie" value="@{janelaTurma$composer.t.serie}" width="200px" /></row>
+					       </rows>
+						</grid>
+				</groupbox>	
+			</tabpanel> 
+			
+			<tabpanel>
+				 <groupbox mold="3d">
+                    <caption label="Alunos"  />  
+						
+					<listbox id="ListagemAluno" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemAluno$composer.getInstance.listarAluno}"
+						mold="paging" pageSize="10">
+						<listhead sizable="true">
+
+							<listheader id="IdAlunoCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeAlunoCabeça" align="center" width="100px" label="Nome" sort="auto" />
+								
+						</listhead>
+						
+						<listitem self="@{each=aluno}">
+							<listcell label="@{aluno.id}"/>
+							<listcell label="@{aluno.nome}"/>
+						</listitem>
+	    			</listbox>
+							
+				</groupbox>  
+				
+			</tabpanel> 
+	
+			
+		</tabpanels>
+	</tabbox>
+	
+	<zscript>
+			<![CDATA[
+ 	
+            professor.getChildren().clear();
+	  	 	for (br.com.sigep.bean.Professor p : br.com.sigep.facade.Facade.getInstance().listarProfessor()) {
+				Comboitem comboitem = new Comboitem(p.getNome());
+				comboitem.setValue(p);
+				professor.appendChild(comboitem);
+		 	}
+    
+       		]]>
+		</zscript>		
+
+</window>
+</zk>

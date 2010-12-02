@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.com.sigep.bean">
+	<class name="OutrosVinculos" lazy="true">
+		<id name="id" >
+			<generator class="native"></generator>
+			<!-- <param name="sequence">id_outrosVinculos</param> Criar a sequence das tabelas -->
+		</id>
+		<property name="status" />
+		<property name="cargaHoraria" />
+		<property name="cargo" />
+		<property name="orgao" />
+	</class>
+</hibernate-mapping>

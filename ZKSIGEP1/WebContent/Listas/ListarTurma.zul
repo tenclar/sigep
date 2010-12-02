@@ -1,0 +1,176 @@
+<?page title="Lista de Turmas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="listarTurma" mode="overlapped" title="Lista de Turmas" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.TurmaController" closable="true" maximizable="true" minimizable="true">
+	<div id="JanelaDisciplina">
+	<borderlayout>
+	
+	<north size="60px">
+	<borderlayout>
+		<center style="background-color:#B1CBD5">
+		<html><![CDATA[<h2 style="color:#FFFFFF;margin-left:10px">Turmas Cadastradas</h2>]]></html></center>
+		<east style="background-color:#B1CBD5">
+		<toolbarbutton src="" href=""/></east>
+	</borderlayout>
+	</north>
+	
+	<west splittable="true" flex="true">
+	<borderlayout id="pesquisa">
+		<north visible="true">
+			<div align="center" id="center">
+				<hbox>Pesquisa por Id:
+					<textbox id="ProcurarTurma" />
+					<button id="resultadoTurma" label="Busca"/>	
+				</hbox>
+			</div>
+		</north>		
+			
+			<center border="none">
+				
+				<listbox id="ListagemTurma" apply="br.com.sigep.facade.Facade" 
+					model="@{ListagemTurma$composer.getInstance.listarTurma}"  
+					mold="paging" pageSize="10" selectedItem="@{listarTurma$composer.selected}">
+
+					<listhead sizable="true">
+							<listheader id="IdTurmaCabeça" align="center" width="30px" label="Id"  />
+							<listheader id="QtdAlunoCabeça" align="center" width="50px" label="Qtd. de Alunos"  />
+							<listheader id="NomeTurmaCabeça" align="center" width="50px" label="Nome"  />
+							<listheader id="TurnoCabeça" align="center" width="50px" label="Turno" />
+							<listheader id="ModalidadeCabeça" align="center" width="50px" label="Modalidade"/>
+							<listheader id="AnoLetivoCabeça" align="center" width="50px" label="Ano Letivo" />
+							<listheader id="SalaCabeça" align="center" width="50px" label="Sala"/>
+							<listheader id="NivelEscolarTurmaCabeça" align="center" width="50px" label="Nível Escolar" />
+							<listheader id="SerieTurmaCabeça" align="center" width="50px" label="Serie" />
+					</listhead>
+
+					<listitem self="@{each=turma}" >
+						<listcell label="@{turma.id}"/>
+						<listcell label="@{turma.qtdAluno}"/>
+						<listcell label="@{turma.nome}"/>
+						<listcell label="@{turma.turno}"/>
+						<listcell label="@{turma.modalidade}"/>
+						<listcell label="@{turma.anoLetivo.ano}"/>
+						<listcell label="@{turma.sala.descricao}"/>
+						<listcell label="@{turma.serie.nivelEscolar.nivel}"/>
+						<listcell label="@{turma.serie.descricao}"/>
+					</listitem> 
+					
+	    		</listbox>
+	    	
+	    	</center>
+	</borderlayout>
+	</west>
+
+	</borderlayout>	
+	</div>	
+<div id="janelaDisciplinaProfessor" width="100%">
+
+<tabbox>
+		<tabs align="center">
+			<tab label="Disciplina"></tab>
+			<tab label="Informações da Turma"></tab>
+			<tab label="Alunos"></tab>
+		</tabs>
+		
+		<tabpanels>
+			<tabpanel>
+				 <groupbox mold="3d">
+                    <caption label="Disciplinas"  />  
+						
+					<listbox id="ListagemDisciplina" mold="paging" pageSize="10" selectedItem="@{listarTurma$composer.disciplinas}">
+						<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeCabeça" align="center" width="100px" label="Nome" sort="auto" />
+							<listheader id="CargaHorariaCabeça" align="center" width="100px" label="Carga Horária" sort="auto" />
+							<listheader id="NivelEscolarCabeça" align="center" width="50px" label="Nível Escolar" />
+							<listheader id="SerieCabeça" align="center" width="100px" label="Série" sort="auto" />
+								
+						</listhead>
+						
+						<listitem self="@{each=disciplina}">
+							<listcell label="@{disciplina.id}"/>
+							<listcell label="@{disciplina.nome}"/>
+							<listcell label="@{disciplina.cargaHoraria}"/>
+							<listcell label="@{disciplina.serie.nivelEscolar.nivel}"/>
+							<listcell label="@{disciplina.serie.descricao}"/>
+						</listitem>
+	    			</listbox>
+							
+				</groupbox>  
+				
+				<h:br/>
+				
+				<groupbox mold="3d" id="VerRegistroDisciplinaProfessor" >
+					 <caption label="Disciplina/Professor"/>  
+						<grid>
+							<rows>
+								<row>Disciplina:<textbox id="disciplina" disabled="true"/></row>
+								<row>Professor:<combobox id="professor"  /></row>
+							</rows>
+						</grid>
+					
+					<separator bar="true"></separator>
+					<div align="center"><button id="adicionar" label="Adicionar"/></div>
+					
+				</groupbox>
+			</tabpanel> 
+			
+			
+			<tabpanel>
+				<groupbox mold="3d" >
+					<caption label="Dados" />
+						<grid>
+							<columns>
+								<column width="20%" />
+								<column />
+							</columns>
+							<rows>
+								<row>Nome:<textbox disabled="true" id="nomeTurma"  width="155px" /></row>
+								<row>Modalidade:<textbox disabled="true" id="modalidade" width="155px" /></row>
+								<row>Qtd. de Alunos:<intbox disabled="true" id="qtdAlunoText" /></row>
+								<row>Ano Letivo:<textbox disabled="true" id="anoLetivoText" /></row>
+								<row>Nível Escolar:<textbox disabled="true" id="nivelEscolar" width="200px" /></row>
+								<row>Série:<textbox disabled="true" id="serieText" width="200px" /></row>
+								<row>Turno:<textbox disabled="true"  id="turnoText" /></row>
+								<row>Sala:<textbox disabled="true" id="salaText" /></row>
+					       </rows>
+					      
+						</grid>
+				</groupbox>	
+			</tabpanel> 
+			
+			<tabpanel>
+				 <groupbox mold="3d">
+                    <caption label="Alunos"  />  
+						
+					<listbox id="ListagemAluno" multiple="false" mold="paging" pageSize="10">
+						<listhead sizable="true">
+							<listheader id="IdAlunoCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="MatriculaCabeça" align="center" width="50px" label="Matricula" sort="auto"/>							
+							<listheader id="NomeAlunoCabeça" align="center" width="100px" label="Nome" sort="auto" />
+						</listhead>
+						
+					<listitem self="@{each=aluno}">
+					
+							<listcell label="@{aluno.id}"/>
+							<listcell label="@{aluno.matricula.numero()}"/>							
+							<listcell label="@{aluno.nome}"/>
+							
+					</listitem> 
+	    			</listbox>
+							
+				</groupbox>  
+				
+			</tabpanel> 
+	
+			
+		</tabpanels>
+	</tabbox>
+	
+</div>
+
+</window>
+</zk>

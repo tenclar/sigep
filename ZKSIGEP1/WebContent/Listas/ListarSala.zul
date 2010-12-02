@@ -1,0 +1,107 @@
+<?page title="Lista de Salas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?><zk>
+	<window id="listarSala" mode="overlapped" title="Lista de Salas" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.SalaController" onClose="self.visible=true;" closable="true" maximizable="true" minimizable="true">
+	<borderlayout>
+	
+	<north size="60px">
+	<borderlayout>
+		<center style="background-color:#B1CBD5">
+		<html><![CDATA[<h2 style="color:#FFFFFF;margin-left:10px">Salas Cadastradas</h2>]]></html></center>
+		<east style="background-color:#B1CBD5">
+		<toolbarbutton src="" href=""/></east>
+	</borderlayout>
+	</north>
+	
+	<west size="640px" splittable="true" flex="true">
+	<borderlayout id="pesquisa">
+		<north visible="true">
+			<div align="center">
+				<hbox>Pesquisa:
+					<textbox id="ProcurarSala"/>
+					<button id="resultadoSala" label="Busca"/>	
+				</hbox>
+			</div>
+		</north>		
+			
+			<center border="none" flex="true">
+				<listbox id="ListagemSala" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemSala$composer.getInstance.listarSala}"
+			mold="paging" pageSize="10" selectedItem="@{listarSala$composer.selected}">
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NumeroCabeça" align="center" width="100px" label="Número" sort="auto" />
+							<listheader id="DecricaoCabeça" align="center" width="100px" label="Descrição" sort="auto" />
+							<listheader id="BlocoCabeça" align="center" width="100px" label="Bloco" sort="auto" />
+								
+					</listhead>
+						
+						<listitem self="@{each=sala}">
+							<listcell label="@{sala.id}"/>
+							<listcell label="@{sala.numero}"/>
+							<listcell label="@{sala.descricao}"/>
+							<listcell label="@{sala.bloco.nome}"/>
+						</listitem>
+	    		</listbox>
+	    	</center>
+	</borderlayout>
+</west>
+
+<center>
+	<div id="DetalheSala">
+		<div id="VerSala" visible="true" width="100%">
+			<grid width="100%">
+
+			 <columns>
+				<column align="right" width="90px"/>
+				<column align="left" />
+  	         </columns>
+				<rows>
+					<row>Id: <label value="@{listarSala$composer.selected.id}" />		</row>
+					<row>Número: <label value="@{listarSala$composer.selected.numero}" />	</row>
+					<row>Descrição: <label value="@{listarSala$composer.selected.descricao}" />	</row>
+					<row>Bloco: <label value="@{listarSala$composer.selected.bloco.nome}" />	</row>
+				</rows>
+			</grid>
+			<separator/>
+			<div align="right">
+				<hbox>
+					<button id="criarSala" label="Novo" href="../Cadastros/CadastroSala.zul" />
+					<button id="editarSala" label="Editar" disabled="@{listarSala$composer.notSelected,load-when='ListagemSala.onSelect'}"/>
+					<button id="deletarSala" label="Deletar" disabled="@{listarSala$composer.notSelected,load-when='ListagemSala.onSelect'}"/>
+				</hbox>
+			</div>
+		</div>
+		
+		<div id="EditarSala" visible="false">
+			<grid width="100%" fixedLayout="true">
+				<columns>
+					<column align="right" width="90px"/>
+					<column align="left"/>
+				</columns>
+				<rows>
+					<row>Id :<intbox id="id" value="@{listarSala$composer.selected.id}" disabled="true" /></row>
+					<row>Número :<intbox id="numero" value="@{listarSala$composer.selected.numero}" /></row>
+					<row>Descrição :<textbox id="descricao" value="@{listarSala$composer.selected.descricao}" /></row>
+					<!--   <row>Bloco :<textbox id="bloco" value="@{listarSala$composer.selected.bloco.nome}" /></row> -->
+					<row>Bloco:<combobox id="bloco" value="@{listarSala$composer.selected.bloco.nome}"  apply="br.com.sigep.facade.Facade" 
+					selectedItem="@{listarSala$composer.selected.bloco}" model="@{bloco$composer.getInstance.listarBloco}"> 
+						<comboitem value="@{listarSala$composer.bloco.nome" /> 
+					</combobox> 
+					</row>			
+				</rows>
+			</grid>
+			<separator/>
+					<div align="right">
+				<hbox>
+					<button id="salvarSala" label="Salvar"/>
+					<button id="cancelar" label="Cancelar"/>
+				</hbox>
+					</div>
+		</div>
+	</div>
+</center>
+						
+	</borderlayout>		
+	</window>
+</zk>

@@ -1,0 +1,75 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexTipoDeUsuario"?>
+<zk>
+	<window id="indexTipoDeUsuario" title="Cadastro de Tipo de Usuário" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true" 
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.TipoDeUsuarioController"
+		onClose="self.visible = false;  event.stopPropagation();">
+
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarTipoDeUsuario" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarTipoDeUsuario" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarTipoDeUsuario" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarTipoDeUsuario" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarTipoDeUsuario" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+		<separator bar="true"/>
+
+	<div id="cadastroTipoDeUsuario" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d">
+         	<caption label="Dados"  />  
+			<grid>
+				<rows>
+					<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+					<row>Descrição:<textbox id="descricao"/></row>
+				</rows>
+			</grid>
+			<separator bar="true"></separator>
+			<div align="center">
+			
+			<button id="adicionar" label="Adicionar"/>
+			<button id="salvar" label="Salvar"/>
+			<button id="cancelar" label="Cancelar"/>
+			
+			</div>
+			</groupbox>
+
+	</div>
+
+		<div id="pesquisarTipoDeUsuario" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarTipoDeUsuario"/>
+					<button id="resultadoTipoDeUsuario" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarTipoDeUsuario" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Tipos de Usuários"  />
+			<listbox id="ListagemTipoDeUsuario" multiple="false" mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="DescriçãoCabeça" align="center" width="100px" label="Descrição" sort="auto" />
+															
+					</listhead>
+						
+					<listitem self="@{each=tipoDeUsuario}">
+					
+							<listcell label="@{tipoDeUsuario.id}"/>
+							<listcell label="@{tipoDeUsuario.descricao}"/>
+							
+					</listitem>
+					
+	    	</listbox>
+	    	</groupbox>
+		</div>
+							
+	</window>
+</zk>

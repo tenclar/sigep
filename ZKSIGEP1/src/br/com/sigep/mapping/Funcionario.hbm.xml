@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.com.sigep.bean">
+	<joined-subclass name="Funcionario" extends="Pessoa" >
+	        <key column="Pessoa_id"/>
+		<property name="reservista" />
+		<property name="serie" />
+		<property name="categoria" />
+		<property name="estadoCivil" />
+		<property name="maeFunc" />
+		<property name="paiFunc" />
+		<property name="fax" />
+		<property name="celular" />
+		<property name="funcao" />
+		<property name="pisPasep" />
+		<property name="tituloEleitoral" />  
+		<property name="zonaEleitoral" />
+		<property name="secaoEleitoral" />
+		<many-to-one name="dadosBancarios" unique="true" class="DadosBancarios" cascade="all" lazy="false"/>
+		<list name="formacao" cascade="all">
+			<key column="idFuncionario" />
+			<index column="indiceFormacao" />
+			<one-to-many class="Formacao" />
+		</list>
+		<list name="outrosVinculos" cascade="all">
+			<key column="idFuncionario" />
+			<index column="indiceOutrosVinculos" />
+			<one-to-many class="OutrosVinculos" />
+		</list>
+	</joined-subclass>
+</hibernate-mapping>

@@ -1,0 +1,87 @@
+<?page title="Notas Por Etapa" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexNotasPorEtapa"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexNotasPorEtapa" mode="overlapped" title="Notas Por Etapa" border="normal" 
+	height="100%" width="100%"  apply="br.com.sigep.controller.NotasPorEtapaController"
+	onClose="self.visible = false;  event.stopPropagation();"
+	closable="true" maximizable="true" minimizable="true" >
+	
+	<div id="FiltroAnoLetivo"  style="height:100%;width:1160px;position:absolute; margin: 20px 30px;">
+	
+	<label id="login" value="${authentication.principal.username}" visible="false" />
+	
+	<groupbox mold="3d" id="groupboxAnoLetivo">
+        	 <caption label="Escolher Ano Letivo"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>Ano Letivo:<combobox id="anoLetivoCombo"  style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center"><button id="filtrarAnoLetivo" label="Selecionar" /></div>
+			
+		</groupbox>
+	
+    </div>
+	
+	<zscript><![CDATA[
+	                  
+	    br.com.sigep.bean.Aluno	alunoEncontrado = br.com.sigep.facade.Facade.getInstance().procurarAlunoPorLogin(login.getValue());
+
+		if(alunoEncontrado != null){		
+
+		groupboxAnoLetivo.setVisible(true);
+
+		anoLetivoCombo.getChildren().clear();
+		for (br.com.sigep.bean.AnoLetivo ano : br.com.sigep.facade.Facade.getInstance().listarAnoLetivoNosQuaisOAlunoFoiMatriculado(alunoEncontrado.getId())) {
+
+			Comboitem comboitem = new Comboitem();
+			comboitem.setLabel("Ano - " + ano.getAno());
+			comboitem.setValue(ano);
+			anoLetivoCombo.appendChild(comboitem);
+		
+		}		    
+	}
+	                  
+	]]></zscript>
+	
+	<groupbox mold="3d" visible="false" id="groupboxTabelaNotaPeriodo1" style="height:335px;width:1160px;position:absolute; margin: 10px 30px;">
+			
+	<tablelayout id="tbl" style="height:280px;width:1100px;">
+		<tablechildren id="tc1">
+			<panel title="Notas do - 1º Período" border="normal">
+				<panelchildren>	
+				<grid>
+				<rows id="rowNotasPrimeiroPeriodo"> </rows>
+				</grid>
+				</panelchildren>
+			</panel>
+		</tablechildren>
+	</tablelayout>
+ 	</groupbox>
+ 	
+ 	<groupbox mold="3d" visible="false" id="groupboxTabelaNotaPeriodo2" style="height:335px;width:1160px;position:absolute; margin: 350px 30px;">
+ 	
+	<tablelayout id="tbl1" columns="3" style="height:100%;width:1100px;">
+		<tablechildren id="tc2">
+			<panel title="Notas do - 2º Período" border="normal">
+				<panelchildren>	
+				<grid>
+				<rows id="rowNotasSegundoPeriodo"></rows> 
+				</grid>
+				</panelchildren>
+			</panel>
+		</tablechildren>
+	</tablelayout>
+	
+	</groupbox>
+	</window> 
+
+</zk>

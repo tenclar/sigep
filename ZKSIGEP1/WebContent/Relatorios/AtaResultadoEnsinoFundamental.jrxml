@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AtaResultadoEnsinoFundamental" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idTurma" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select t.*, a.*, al.ano, se.descricao, p.nome as nomea
+from turma t, aluno a, anoletivo al, serie se, matricula m, pessoa p
+where al.id = t.anoletivo and
+      t.serie = se.id and
+      m.turma = t.id and
+      m.idaluno = a.pessoa_id and
+      a.pessoa_id = p.id and
+      t.id = $P{idTurma}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="qtdaluno" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="turno" class="java.lang.String"/>
+	<field name="modalidade" class="java.lang.String"/>
+	<field name="anoletivo" class="java.lang.Long"/>
+	<field name="sala" class="java.lang.Long"/>
+	<field name="serie" class="java.lang.Long"/>
+	<field name="pessoa_id" class="java.lang.Long"/>
+	<field name="paialuno" class="java.lang.String"/>
+	<field name="maealuno" class="java.lang.String"/>
+	<field name="tipotelefone" class="java.lang.String"/>
+	<field name="ramalresponsavel" class="java.lang.String"/>
+	<field name="nascmae" class="java.sql.Timestamp"/>
+	<field name="nascpai" class="java.sql.Timestamp"/>
+	<field name="profissao" class="java.lang.String"/>
+	<field name="responsavel" class="java.lang.String"/>
+	<field name="telefoneresponsavel" class="java.lang.String"/>
+	<field name="situacao" class="java.lang.String"/>
+	<field name="etnia" class="java.lang.String"/>
+	<field name="datacadastro" class="java.sql.Timestamp"/>
+	<field name="foto" class="java.lang.String"/>
+	<field name="recomendacoesmedicas" class="java.lang.Long"/>
+	<field name="registro" class="java.lang.Long"/>
+	<field name="ano" class="java.lang.Integer"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="nomea" class="java.lang.String"/>
+	<title>
+		<band height="436" splitType="Stretch">
+			<staticText>
+				<reportElement x="85" y="0" width="172" height="13"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO DE ALAGOAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="10" width="354" height="13"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE ESTADO DA EDUCAÇÃO E DO ESPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="21" width="354" height="13"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUPERINTENDÊNCIA DE GESTÃO DA EDUCAÇÃO BÁSICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="33" width="354" height="13"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUPERINTENDÊNCIA DE GESTÃO DO SISTEMA EDUCACIONAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="44" width="354" height="13"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[____ COORDENADORIA DE ENSINO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="85" width="572" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="138" width="572" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="111" width="572" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="227" y="85" width="112" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Estabelecimento de Ensino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="112" width="112" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Endereço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="139" width="572" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Documento de credenciamento da instituição e regularização do curso: Ato, Data e Órgão do Poder Público]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="169" width="502" height="17"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATA DE RESULTADOS FINAIS DO ENSINO FUNDAMENTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="204" width="572" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[      Ao(s) _______ dia(s) do mês de _________________________ de ___________ registram-se abaixo os RESULTADOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="218" width="572" height="13"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[  FINAIS (desempenho e frequência) do ano letivo de ___________ dos(as) educandos(as) da(o) ___________ série/ano do Ensino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="231" width="572" height="13"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[  FUNDAMENTAL, na modalidade ______________, turma ___________, turno ________________.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="24" y="266" width="224" height="170"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="248" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="268" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="288" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="308" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="328" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="348" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="368" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="388" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="408" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="428" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="448" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="468" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="488" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="508" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="528" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="548" y="291" width="20" height="145"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="248" y="266" width="260" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="508" y="266" width="60" height="25"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="84" y="342" width="109" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do Educando(a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="272" width="179" height="19"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPONENTES CURRICULAREES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="266" width="66" height="25"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÔMPUTO GERAL*]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="345" width="23" height="84"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Língua Portuguesa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="369" width="20" height="60"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matemática]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="364" width="20" height="65"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[História]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="328" y="345" width="20" height="84"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ciências]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="345" width="20" height="84"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ensino Religioso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="345" width="20" height="84"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Arte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="346" width="23" height="84"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Educação Infantil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="337" width="20" height="92"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Média Global Anual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="488" y="337" width="23" height="92"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Média Global Final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="310" width="20" height="119"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resultado/Desempenho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="528" y="320" width="20" height="109"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resultado/Frequência]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="548" y="345" width="20" height="84"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resultado Final]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="4" y="266" width="20" height="170"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="4" y="315" width="20" height="62"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº de Ordem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="345" width="20" height="84"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Geografia]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="217" width="49" height="12"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="230" width="74" height="12"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{modalidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="230" width="72" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{turno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="230" width="57" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="218" width="64" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<rectangle>
+				<reportElement x="4" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="24" y="0" width="224" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="248" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="268" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="288" y="0" width="20" height="10"/>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="0" width="19" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="308" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="328" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="348" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="368" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="388" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="408" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="428" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="448" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="468" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="488" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="508" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="528" y="0" width="20" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="548" y="0" width="20" height="10"/>
+			</rectangle>
+			<textField>
+				<reportElement x="23" y="0" width="224" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomea}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="35" y="30" width="147" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Resultado de Frequência: A ou R;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="10" width="57" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[* Cômputo Geral:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="40" width="137" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Resultado Final: A, R ou APP.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="20" width="349" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Resultado do Desempenho: A = Aprovado, R = Reprovado e APP = Aprovado em progressão parcial;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="0" width="157" height="10"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[___________________________________]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="394">
+			<staticText>
+				<reportElement x="10" y="122" width="247" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[_______________________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="135" width="248" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Diretor(a) - registro ou matrícula nº _____________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="23" width="572" height="13"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[  assinada por mim e visada pelo Diretor do Estabelecimento.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="10" width="572" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[      E para constar _________________________________________________________ secretário(a), lavrei a presente ata]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="122" width="248" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[________________________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="88" width="277" height="13"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Visto, em: ________/_______________/_________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="183" width="572" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[O espaço em branco é para registrar o nome da Língua Estrangeira Moderna optativa para o aluno, bem como, os resultados obtidos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="55" width="572" height="13"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[____________________, ________ de _____________ de __________.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="135" width="248" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Secretário(a) - registro ou matrícula nº _____________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="171" width="179" height="12"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBSERVAÇÕES:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

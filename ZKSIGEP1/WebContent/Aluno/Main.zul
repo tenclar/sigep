@@ -1,0 +1,75 @@
+<?page title="Sistema Gerenciador de Escola Publica - SIGEP" contentType="text/html;charset=UTF-8"?>
+
+<zk>
+
+<?script type="text/javascript" src="/js/jquery-1.4.4.js"?>
+<?script type="text/javascript" src="/js/jquery.maskedinput-1.2.2.js"?>
+<?script type="text/javascript" src="/js/masks.js"?>
+
+<window title="SIGEP - Menu Principal" id="main" mode="overlapped"  border="normal" height="1000px"  width="100%"  
+apply="br.com.sigep.controller.IndexController" xmlns:n="http://www.zkoss.org/2005/zk/native">
+
+
+<borderlayout>
+	<north style=" background-image: URL(../img/Imagem1.jpg);">
+
+		<div>
+            
+			<div id="header">
+
+				<div id="logo" align="center">
+ 					 <image src="/img/logoSigep.gif" height="160px"/>
+ 					
+				</div>
+				
+				
+				
+				<div align="right">
+				<toolbarbutton src="/img/exit.png" href="../j_spring_security_logout" tooltiptext="Clique para Sair!" 
+				style="position:absolute; margin: -155px 1200px;"/>
+ 				
+ 				<label value="Sair" style="font-weight:bold;color:#FFFFFF;position:absolute; margin: -125px 1203px;"/>
+ 				<label value="Bem vindo(a): ${authentication.name}" width="200px" style="font-weight:bold;color:#FFFFFF;position:absolute; margin: -18px 1030px;"/>
+				</div>
+				
+			</div>
+
+<menubar height="25px">
+	<menu label="Administração   " image="/img/administracao.png">
+		<menupopup>
+				<menuitem id="NotasPorEtapaMenuItem" label="Notas por Etapa" image="/img/notas.png"/>
+				<menuseparator />
+				<menuitem id="NotasPorPeriodoMenuItem" label="Notas por Periodo" image="/img/notas.png"/>
+		</menupopup>
+	</menu>
+	
+	<menu  label="Ajuda   " image="/img/Ajuda.png">
+		<menupopup>
+				<menuitem id="ajudaMenuItem" label="Ajuda do SIGEP" image="/img/Ajuda.png"/>
+				<menuseparator />
+				<menuitem id="sobreMenuItem" label="Sobre" image="/img/Sobre.png"/>
+				<menuseparator />				
+				<menuitem label="Sair" image="/img/exit.png" href="../j_spring_security_logout"/>
+		</menupopup>
+	</menu>
+</menubar>
+
+	</div >
+
+	</north>
+	
+	<center border="normal" style="background-image: URL(../img/TESTE3.jpg); hight: 1000px; width='100%'" >	
+		<div id="divCenter" align="center" >
+		</div>
+	</center>
+
+	<south size="25px" border="normal" style=" background-color: #A2B5CD;">
+			<toolbar mold="panel" align="center">
+				Powered by
+			<toolbarbutton label="Expert SI - Serviços Informatizados"/>
+			</toolbar>
+	</south>
+
+</borderlayout>
+</window>
+</zk>

@@ -1,0 +1,94 @@
+<?page title="Lista de Tipos de Usuários" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?><zk>
+	<window id="listarTipoDeUsuario" mode="overlapped" title="Lista de Tipos de Usuários" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.TipoDeUsuarioController" onClose="self.visible=true;" closable="true" maximizable="true" minimizable="true">
+	<borderlayout>
+	
+	<north size="60px">
+	<borderlayout>
+		<center style="background-color:#B1CBD5">
+		<html><![CDATA[<h2 style="color:#FFFFFF;margin-left:10px">Tipos De Usuários Cadastradas</h2>]]></html></center>
+		<east style="background-color:#B1CBD5">
+		<toolbarbutton src="" href=""/></east>
+	</borderlayout>
+	</north>
+	
+	<west size="640px" splittable="true" flex="true">
+	<borderlayout id="pesquisa">
+		<north visible="true">
+			<div align="center">
+				<hbox>Pesquisa:
+					<textbox id="ProcurarTipoDeUsuario" value=""/>
+					<button id="resultadoTipoDeUsuario" label="Busca"/>	
+				</hbox>
+			</div>
+		</north>		
+			
+			<center border="none" flex="true">
+				<listbox id="ListagemTipoDeUsuario" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemTipoDeUsuario$composer.getInstance.listarTipoDeUsuario}"
+			mold="paging" pageSize="10" selectedItem="@{listarTipoDeUsuario$composer.selected}">
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="DecricaoCabeça" align="center" width="100px" label="Descrição" sort="auto" />
+														
+					</listhead>
+						
+						<listitem self="@{each=tipoDeUsuario}">
+							<listcell label="@{tipoDeUsuario.id}"/>
+							<listcell label="@{tipoDeUsuario.descricao}"/>
+						</listitem>
+	    		</listbox>
+	    	</center>
+	</borderlayout>
+</west>
+
+<center>
+	<div id="DetalheTipoDeUsuario">
+		<div id="VerTipoDeUsuario" visible="true" width="100%">
+			<grid width="100%">
+
+			 <columns>
+				<column align="right" width="90px"/>
+				<column align="left" />
+  	         </columns>
+				<rows>
+					<row>Id: <label value="@{listarTipoDeUsuario$composer.selected.id}" />		</row>
+					<row>Descrição: <label value="@{listarTipoDeUsuario$composer.selected.descricao}" />	</row>
+				</rows>
+			</grid>
+			<separator/>
+			<div align="right">
+				<hbox>
+					<button id="criarTipoDeUsuario" label="Novo" href="../Cadastros/CadastroTipoDeUsuario.zul"/>
+					<button id="editarTipoDeUsuario" label="Editar" disabled="@{listarTipoDeUsuario$composer.notSelected,load-when='ListagemTipoDeUsuario.onSelect'}"/>
+					<button id="deletarTipoDeUsuario" label="Deletar" disabled="@{listarTipoDeUsuario$composer.notSelected,load-when='ListagemTipoDeUsuario.onSelect'}"/>
+				</hbox>
+			</div>
+		</div>
+		
+		<div id="EditarTipoDeUsuario" visible="false">
+			<grid width="100%" fixedLayout="true">
+				<columns>
+					<column align="right" width="90px"/>
+					<column align="left"/>
+				</columns>
+				<rows>
+					<row>Id :<intbox id="id" value="@{listarTipoDeUsuario$composer.selected.id}" disabled="true" /></row>
+					<row>Descrição :<textbox id="descricao" value="@{listarTipoDeUsuario$composer.selected.descricao}" /></row>
+				</rows>
+			</grid>
+			<separator/>
+					<div align="right">
+				<hbox>
+					<button id="salvarTipoDeUsuario" label="Salvar"/>
+					<button id="cancelar" label="Cancelar"/>
+				</hbox>
+					</div>
+		</div>
+	</div>
+</center>
+						
+	</borderlayout>		
+	</window>
+</zk>

@@ -1,0 +1,20 @@
+<?page title="Sobre o Sistema Gerenciador de Escola Pública" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <window id="IndexSobre" mode="overlapped" border="normal" height="400px"  width="600px" title="Sobre o Sistema Gerenciador de Escola Pública"
+	onClose="self.visible = false;  event.stopPropagation();" closable="true" style="position:absolute; margin: 100px 300px;">
+		
+		<div id="logo" align="center" height="365px"  width="584px" 
+		style="background-image: URL(../img/planoDeFundo.jpg);position:absolute; margin: -3px -3px;">
+ 					<image src="../img/logoSigep.gif" height="160px" width="500px" style="position:absolute; margin: 30px 30px;"/>
+ 					<label value="SIGEP 1.0"  style="position:absolute; margin: 200px 250px;font-weight:bold;color:#FFFFFF;"></label>
+ 					<label value="Sistema Gerenciador de Escola Pública"  style="position:absolute; margin: 220px 150px;font-weight:bold;color:#FFFFFF;"></label>
+ 					<label style="font-weight:bold;color:#FFFFFF;position:absolute; margin: 240px 230px;">Desenvolvido por:</label>
+ 					<label style="font-weight:bold;color:#FFFFFF;position:absolute; margin: 260px 230px;">- Edicio Santos; </label>
+ 					<label style="font-weight:bold;color:#FFFFFF;position:absolute; margin: 280px 240px;">- Elano Lima;</label>
+ 					<label style="font-weight:bold;color:#FFFFFF;position:absolute; margin: 300px 200px;">- José Roberto Feitoza.</label>
+		</div>
+	</window>
+</zk>

@@ -1,0 +1,72 @@
+<?page title="Relatório - Ficha Individual do Aluno" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexFichaIndividualEnsinoMedio"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexFichaIndividualEnsinoMedio" mode="overlapped" title="Ficha Individual do Ensino Médio" border="normal" 
+	height="100%" width="100%" apply="br.com.sigep.controller.FichaIndividualEnsinoMedioController" 
+	onClose="self.visible = false;  event.stopPropagation();"
+	closable="true" maximizable="true" minimizable="true" >
+	
+	
+    
+	<div id="FiltroFichaEnsinoMedio"  style="height:100%;width:1160px;position:absolute; margin: 20px 30px;">
+	
+	<zscript><![CDATA[
+		Constraint ctt = new Constraint() {
+   			 public void validate(Component comp, Object value) throws WrongValueException {
+    		 	if(value == ""){
+    		 		throw new WrongValueException(comp, "Preencha o Campo!");
+    			}else if (br.com.sigep.facade.Facade.getInstance().verificarSeENumero((String) value) == false){
+    				throw new WrongValueException(comp, "Digite Somente Números!");
+    			} 
+        	} 
+		}
+    ]]>
+    </zscript>
+    
+		<groupbox mold="3d" id="groupboxProcurarAluno">
+        	 <caption label="Identificar Aluno"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>RG do Aluno:
+							<hbox>
+								<textbox id="rgDoAluno" width="300px" constraint="${ctt}"/>
+								<button id="procurarDadosDoAluno" label="Buscar Aluno"/>
+							</hbox>
+						</row>
+					</rows>
+					
+				</grid>
+			
+		</groupbox>
+		
+		<h:br/>
+		
+		<groupbox mold="3d" visible="false" id="groupboxAnoLetivo">
+        	 <caption label="Escolher Ano Letivo"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>Ano Letivo:<combobox id="anoLetivoCombo"  style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center"><button id="gerarPdfMedio" label="Gerar Relatório" /></div>
+			
+		</groupbox>
+	
+	</div>
+	
+</window>
+
+</zk>

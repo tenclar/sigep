@@ -1,0 +1,81 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexDisciplina"?>
+<zk>
+	<window id="indexDisciplina" title="Cadastro de Disciplinas" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true" 
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.DisciplinaController"
+		onClose="self.visible = false;  event.stopPropagation();">
+
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarDisciplina" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarDisciplina" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarDisciplina" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarDisciplina" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarDisciplina" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+		<separator bar="true"/>
+
+	<div id="cadastroDisciplina" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d">
+         	<caption label="Dados"  />  
+			<grid>
+				<rows>
+					<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+					<row>Nome:<textbox id="nome"/></row>
+					<row>Carga Horária:<intbox id="cargaHoraria"/></row>
+					<row>Série:<combobox id="serie" style="background: #FFFFFF;" readonly="true"/></row>
+				</rows>
+			</grid>
+			<separator bar="true"></separator>
+			<div align="center">
+			
+			<button id="adicionar" label="Adicionar"/>
+			<button id="salvar" label="Salvar"/>
+			<button id="cancelar" label="Cancelar"/>
+			
+			</div>
+			</groupbox>
+
+	</div>
+
+		<div id="pesquisarDisciplina" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarDisciplina"/>
+					<button id="resultadoDisciplina" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarDisciplina" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Disciplinas"  />
+			<listbox id="ListagemDisciplina" multiple="false" mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeCabeça" align="center" width="100px" label="Nome" sort="auto" />
+							<listheader id="CargaHorariaCabeça" align="center" width="100px" label="Carga Horária" sort="auto" />
+							<listheader id="SerieCabeça" align="center" width="100px" label="Série" sort="auto" />
+								
+					</listhead>
+						
+					<listitem self="@{each=disciplina}">
+					
+							<listcell label="@{disciplina.id}"/>
+							<listcell label="@{disciplina.nome}"/>
+							<listcell label="@{disciplina.cargaHoraria}"/>
+							<listcell label="@{disciplina.serie.descricao}"/>
+							
+					</listitem>
+										
+	    	</listbox>
+	    	</groupbox>
+		</div>
+							
+	</window>
+</zk>

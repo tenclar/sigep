@@ -1,0 +1,77 @@
+<?page title="Notas Por Período" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexNotasPorPeriodo"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexNotasPorPeriodo" mode="overlapped" title="Notas Por Período" border="normal" 
+	height="100%" width="100%"  apply="br.com.sigep.controller.NotasPorPeriodoController" 
+	onClose="self.visible = false;  event.stopPropagation();"
+	closable="true" maximizable="true" minimizable="true" >
+	
+	<div id="FiltroAnoLetivo"  style="height:100%;width:1160px;position:absolute; margin: 20px 30px;">
+	
+	<label id="login" value="${authentication.principal.username}" visible="false" />
+	
+	<groupbox mold="3d" id="groupboxAnoLetivo">
+        	 <caption label="Escolher Ano Letivo"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						<row>Ano Letivo:<combobox id="anoLetivoCombo"  style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center"><button id="filtrarAnoLetivo" label="Selecionar" /></div>
+			
+		</groupbox>
+	
+    </div>
+	
+		
+	<groupbox mold="3d" visible="false" id="groupboxTabelaNota" style="height:600px;width:1160px;position:absolute; margin: 20px 30px;">
+	<caption id="caption"/>
+		
+	<tablelayout id="tbl" columns="3" style="height:100%;width:1100px;">
+		<tablechildren id="tc1">
+			<panel title="Notas do Semestre" border="normal">
+				<panelchildren>	
+				<grid>
+				<rows id="rowNotasPeriodo"></rows> 
+				</grid>
+				</panelchildren>
+			</panel>
+		</tablechildren>
+	</tablelayout>
+	
+	</groupbox>
+	
+	<zscript><![CDATA[
+	                  
+	    br.com.sigep.bean.Aluno	alunoEncontrado = br.com.sigep.facade.Facade.getInstance().procurarAlunoPorLogin(login.getValue());
+
+		if(alunoEncontrado != null){		
+
+		groupboxAnoLetivo.setVisible(true);
+
+		anoLetivoCombo.getChildren().clear();
+		for (br.com.sigep.bean.AnoLetivo ano : br.com.sigep.facade.Facade.getInstance().listarAnoLetivoNosQuaisOAlunoFoiMatriculado(alunoEncontrado.getId())) {
+
+			Comboitem comboitem = new Comboitem();
+			comboitem.setLabel("Ano - " + ano.getAno());
+			comboitem.setValue(ano);
+			anoLetivoCombo.appendChild(comboitem);
+		
+		}
+		
+		caption.setLabel("Notas do Aluno - " + alunoEncontrado.getNome());
+	}
+	                  
+	]]></zscript>
+
+	</window>
+
+</zk>

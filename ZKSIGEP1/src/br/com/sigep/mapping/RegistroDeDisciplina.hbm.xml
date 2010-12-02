@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.com.sigep.bean">
+	<class name="RegistroDeDisciplina" lazy="true">
+		<id name="id" >
+			<generator class="native"></generator>
+			<!-- <param name="sequence">id_registroDeDisciplina</param> Criar a sequence das tabelas -->
+		</id>
+		<many-to-one name="turma" class="Turma" />
+		<many-to-one name="disciplina" class="Disciplina" />
+		<many-to-one name="professor" class="Professor" />
+	</class>
+</hibernate-mapping>

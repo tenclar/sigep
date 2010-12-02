@@ -1,0 +1,98 @@
+<?page title="Lista de Blocos" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?><zk>
+	<window id="listarBloco" mode="overlapped" title="Lista de Blocos" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.BlocoController" onClose="self.visible=true;" closable="true" maximizable="true" minimizable="true">
+	<borderlayout>
+	
+	<north size="60px">
+	<borderlayout>
+		<center style="background-color:#B1CBD5">
+		<html><![CDATA[<h2 style="color:#FFFFFF;margin-left:10px">Blocos Cadastradas</h2>]]></html></center>
+		<east style="background-color:#B1CBD5">
+		<toolbarbutton src="" href=""/></east>
+	</borderlayout>
+	</north>
+	
+	<west size="640px" splittable="true" flex="true">
+	<borderlayout id="pesquisa">
+		<north visible="true">
+			<div align="center">
+				<hbox>Pesquisa:
+					<textbox id="ProcurarBloco" value=""/>
+					<button id="resultadoBloco" label="Busca"/>	
+				</hbox>
+			</div>
+		</north>		
+			
+			<center border="none" flex="true">
+				<listbox id="ListagemBloco" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemBloco$composer.getInstance.listarBloco}"
+			mold="paging" pageSize="10" selectedItem="@{listarBloco$composer.selected}">
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="NomeCabeça" align="center" width="100px" label="Nome" sort="auto" />
+							<listheader id="QtdCabeça" align="center" width="100px" label="Quantidade de Sala" sort="auto" />
+															
+					</listhead>
+						
+						<listitem self="@{each=bloco}">
+							<listcell label="@{bloco.id}"/>
+							<listcell label="@{bloco.nome}"/>
+							<listcell label="@{bloco.qtdSala}"/>
+						</listitem>
+	    		</listbox>
+	    	</center>
+	</borderlayout>
+</west>
+
+<center>
+	<div id="DetalheBloco">
+		<div id="VerBloco" visible="true" width="100%">
+			<grid width="100%">
+
+			 <columns>
+				<column align="right" width="90px"/>
+				<column align="left" />
+  	         </columns>
+				<rows>
+					<row>Id: <label value="@{listarBloco$composer.selected.id}" />		</row>
+					<row>Nome: <label value="@{listarBloco$composer.selected.nome}" />	</row>
+					<row>Qtd de Sala: <label value="@{listarBloco$composer.selected.qtdSala}" />	</row>
+				</rows>
+			</grid>
+			<separator/>
+			<div align="right">
+				<hbox>
+					<button id="criarBloco" label="Novo" href="../Cadastros/CadastroBloco.zul"/>
+					<button id="editarBloco" label="Editar" disabled="@{listarBloco$composer.notSelected,load-when='ListagemBloco.onSelect'}"/>
+					<button id="deletarBloco" label="Deletar" disabled="@{listarBloco$composer.notSelected,load-when='ListagemBloco.onSelect'}"/>
+				</hbox>
+			</div>
+		</div>
+		
+		<div id="EditarBloco" visible="false">
+			<grid width="100%" fixedLayout="true">
+				<columns>
+					<column align="right" width="90px"/>
+					<column align="left"/>
+				</columns>
+				<rows>
+					<row>Id :<intbox id="id" value="@{listarBloco$composer.selected.id}" disabled="true" /></row>
+					<row>Nome :<textbox id="numero" value="@{listarBloco$composer.selected.nome}" /></row>
+					<row>Qtd de Sala :<intbox id="descricao" value="@{listarBloco$composer.selected.qtdSala}" /></row>
+				</rows>
+			</grid>
+			<separator/>
+					<div align="right">
+				<hbox>
+					<button id="salvarBloco" label="Salvar"/>
+					<button id="cancelar" label="Cancelar"/>
+				</hbox>
+					</div>
+		</div>
+	</div>
+</center>
+						
+	</borderlayout>		
+	</window>
+</zk>

@@ -1,0 +1,84 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexAfastamento"?>
+<zk>
+	<window id="indexAfastamento" title="Cadastro de Afastamento" border="normal"
+		height="100%" width="100%" closable="true" maximizable="true" 
+		minimizable="true" mode="overlapped"
+		apply="br.com.sigep.controller.AfastamentoController"
+		onClose="self.visible = false;  event.stopPropagation();">
+
+		<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarAfastamento" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarAfastamento" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarAfastamento" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarAfastamento" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarAfastamento" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+		<separator bar="true"/>
+
+	<div id="cadastroAfastamento" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			<groupbox mold="3d">
+         	<caption label="Dados"  />  
+			<grid>
+				<rows>
+					<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+					<row>Professor:<combobox id="professor" style="background: #FFFFFF;" readonly="true"/></row>
+					<row>Motivo do Afastamento:<textbox id="descricao" rows="4" width="450px"/></row>
+					<row>Data de Saída:<datebox id="dataSaida" style="background: #FFFFFF;" readonly="true"/></row>
+					<row>Data de Retorno:<datebox id="dataVolta" style="background: #FFFFFF;" readonly="true"/></row>
+				</rows>
+			</grid>
+			<separator bar="true"></separator>
+			<div align="center">
+			
+			<button id="adicionar" label="Adicionar"/>
+			<button id="salvar" label="Salvar"/>
+			<button id="cancelar" label="Cancelar"/>
+			
+			</div>
+			</groupbox>
+
+	</div>
+
+		<div id="pesquisarAfastamento" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarAfastamento"/>
+					<button id="resultadoAfastamento" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+
+		<div id="listarAfastamento" visible="false" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;">
+		
+		<groupbox mold="3d">
+         	<caption label="Lista de Afastamentos"  />
+			<listbox id="ListagemAfastamento" multiple="false"	mold="paging" pageSize="12" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+			
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="80px" label="Id" sort="auto"/>
+							<listheader id="ProfessorCabeça" align="center" width="150px" label="Professor" sort="auto" />
+							<listheader id="DecricaoCabeça" align="center" width="200px" label="Descrição" sort="auto" />
+							<listheader id="DtSaidaCabeça" align="center" width="150px" label="Data de Saída" sort="auto" />
+							<listheader id="DtVoltaCabeça" align="center" width="150px" label="Data de Volta" sort="auto" />
+								
+					</listhead>
+						
+						<listitem self="@{each=afastamento}">
+						
+							<listcell label="@{afastamento.id}"/>
+							<listcell label="@{afastamento.professor.nome}"/>
+							<listcell label="@{afastamento.descricao}"/>
+							<listcell label="@{afastamento.dataSaida}"/>
+							<listcell label="@{afastamento.dataVolta}"/>
+							
+						</listitem>
+										
+	    	</listbox>
+	    	</groupbox>
+		</div>
+							
+	</window>
+</zk>

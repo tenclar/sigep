@@ -1,0 +1,102 @@
+<?page title="Lista de Anos Letivos" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?><zk>
+	<window id="listarAnoLetivo" mode="overlapped" title="Lista de Anos Letivos" border="normal" height="100%" width="100%" 
+	apply="br.com.sigep.controller.AnoLetivoController" onClose="self.visible=true;" closable="true" maximizable="true" minimizable="true">
+	<borderlayout>
+	
+	<north size="60px">
+	<borderlayout>
+		<center style="background-color:#B1CBD5">
+		<html><![CDATA[<h2 style="color:#FFFFFF;margin-left:10px">Anos Letivos Cadastradas</h2>]]></html></center>
+		<east style="background-color:#B1CBD5">
+		<toolbarbutton src="" href=""/></east>
+	</borderlayout>
+	</north>
+	
+	<west size="640px" splittable="true" flex="true">
+	<borderlayout id="pesquisa">
+		<north visible="true">
+			<div align="center">
+				<hbox>Pesquisa:
+					<textbox id="ProcurarAnoLetivo" value=""/>
+					<button id="resultadoAnoLetivo" label="Busca"/>	
+				</hbox>
+			</div>
+		</north>		
+			
+			<center border="none" flex="true">
+				<listbox id="ListagemAnoLetivo" multiple="false" apply="br.com.sigep.facade.Facade" model="@{ListagemAnoLetivo$composer.getInstance.listarAnoLetivo}"
+			mold="paging" pageSize="10" selectedItem="@{listarAnoLetivo$composer.selected}">
+					<listhead sizable="true">
+
+							<listheader id="IdCabeça" align="center" width="50px" label="Id" sort="auto"/>
+							<listheader id="AnoCabeça" align="center" width="100px" label="Ano" sort="auto" />
+							<listheader id="DtFimCabeça" align="center" width="100px" label="Data Ínicio" sort="auto" />
+							<listheader id="DtInicioCabeça" align="center" width="100px" label="Data Fim" sort="auto" />
+								
+					</listhead>
+						
+						<listitem self="@{each=anoLetivo}">
+							<listcell label="@{anoLetivo.id}"/>
+							<listcell label="@{anoLetivo.ano}"/>
+							<listcell label="@{anoLetivo.dataInicio}"/>
+							<listcell label="@{anoLetivo.dataFim}"/>
+						</listitem>
+	    		</listbox>
+	    	</center>
+	</borderlayout>
+</west>
+
+<center>
+	<div id="DetalheAnoLetivo">
+		<div id="VerAnoLetivo" visible="true" width="100%">
+			<grid width="100%">
+
+			 <columns>
+				<column align="right" width="90px"/>
+				<column align="left" />
+  	         </columns>
+				<rows>
+					<row>Id: <label value="@{listarAnoLetivo$composer.selected.id}" />		</row>
+					<row>Ano: <label value="@{listarAnoLetivo$composer.selected.ano}" />	</row>
+					<row>Data Ínicio: <label value="@{listarAnoLetivo$composer.selected.dataInicio}" />	</row>
+					<row>Data Fim: <label value="@{listarAnoLetivo$composer.selected.dataFim}" />	</row>
+				</rows>
+			</grid>
+			<separator/>
+			<div align="right">
+				<hbox>
+					<button id="criarAnoLetivo" label="Novo" href="../Cadastros/CadastroAnoLetivo.zul"/>
+					<button id="editarAnoLetivo" label="Editar" disabled="@{listarAnoLetivo$composer.notSelected,load-when='ListagemAnoLetivo.onSelect'}"/>
+					<button id="deletarAnoLetivo" label="Deletar" disabled="@{listarAnoLetivo$composer.notSelected,load-when='ListagemAnoLetivo.onSelect'}"/>
+				</hbox>
+			</div>
+		</div>
+		
+		<div id="EditarAnoLetivo" visible="false">
+			<grid width="100%" fixedLayout="true">
+				<columns>
+					<column align="right" width="90px"/>
+					<column align="left"/>
+				</columns>
+				<rows>
+					<row>Id:<intbox id="id" value="@{listarAnoLetivo$composer.selected.id}" disabled="true" /></row>
+					<row>Ano:<intbox id="ano" value="@{listarAnoLetivo$composer.selected.ano}" /></row>
+					<row>Data Ínicio:<datebox id="dataInicio" value="@{listarAnoLetivo$composer.selected.dataInicio}" /></row>
+					<row>Data Fim :<datebox id="dataFim" value="@{listarAnoLetivo$composer.selected.dataFim}" /></row>
+				</rows>
+			</grid>
+			<separator/>
+					<div align="right">
+				<hbox>
+					<button id="salvarAnoLetivo" label="Salvar"/>
+					<button id="cancelar" label="Cancelar"/>
+				</hbox>
+					</div>
+		</div>
+	</div>
+</center>
+						
+	</borderlayout>		
+	</window>
+</zk>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.com.sigep.bean">
+	<class name="Pessoa">
+		<id name="id">
+			<generator class="native">
+				<!-- <param name="sequence">id_pessoa</param> Criar a sequence das tabelas -->
+			</generator>
+		</id>
+		<property name="nome" />
+		<property name="nascimento" />
+		<property name="rg" />
+		<property name="telefone" />
+		<property name="email" />
+		<property name="orgExpedidor" />
+		<property name="sexo" />
+		<property name="ufOrgao" />
+		<property name="nacionalidade" />
+		<property name="naturalidade" />
+		<property name="necessidade" />
+		<property name="ufNascimento" />
+		<property name="ramalTelefone" />
+		<property name="cpf" />
+		<property name="rgExpedicao" />
+		<many-to-one name="usuario" unique="true" class="Usuario" cascade="all" lazy="false"/>
+		<many-to-one name="endereco" unique="true" class="Endereco" cascade="all" lazy="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?page title="Sobre o Sistema Gerenciador de Escola Pública" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <window id="IndexAjuda" mode="overlapped" border="normal" height="400px"  width="600px" title="Ajuda do Sistema Gerenciador de Escola Pública"
+	onClose="self.visible = false;  event.stopPropagation();" closable="true" style="position:absolute; margin: 100px 300px;">
+		
+		<div id="logo" align="center" height="365px"  width="584px" 
+		style="background-image: URL(../img/planoDeFundo.jpg);position:absolute; margin: -3px -3px;">
+ 					<label style="position:absolute; margin: 80px 10px;font-weight:bold;color:#FFFFFF;">
+ 					O SIGEP é um software livre; você pode redistribuí-lo e/ou modificá-lo bastando apenas
+ 					conservar os créditos dos desenvolvedores.
+ 					</label>
+ 					<label style="position:absolute; margin: 120px 10px;font-weight:bold;color:#FFFFFF;">
+ 					O SIGEP é distribuído na esperança que seja útil, mas SEM NENHUMA GARANTIA;
+ 					até mesmo sem a garantia implicada de COMERCIALIZAÇÃO ou de ADAPTAÇÃO A UM PROPÓSITO EM PARTICULAR.
+ 					</label>
+ 					<label style="position:absolute; margin: 180px 190px;font-weight:bold;color:#FFFFFF;">
+ 					O SIGEP está  disponível em:
+ 					</label>
+ 					
+ 					<h:a href="http://code.google.com/p/sigep/" style="position:absolute; margin: 200px 185px;font-weight:bold;color:#FFFFFF;">http://code.google.com/p/sigep/</h:a>
+ 					 
+ 					
+		</div>
+	</window>
+</zk>

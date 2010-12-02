@@ -1,0 +1,115 @@
+<?page title="Registro de Disciplinas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexRegistroDeAula"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="indexRegistroDeAula" mode="overlapped" title="Cadastro de Registro De Aulas" border="normal"  height="100%" width="100%" 
+	apply="br.com.sigep.controller.RegistroDeAulaController" closable="true" maximizable="true" minimizable="true" >
+
+	<fisheyebar style="position:center;" attachEdge="top" itemWidth="30" itemHeight="30" itemMaxHeight="45" itemMaxWidth="45">
+		
+			<fisheye id="CadastrarRegistroDeAula" image="/img/novo.png" tooltiptext="Novo"/>
+			<fisheye id="ListarRegistroDeAula" image="/img/listar.jpg" tooltiptext="Listar"/>
+			<fisheye id="PesquisarRegistroDeAula" image="/img/pesquisar.png" tooltiptext="Pesquisar"/>
+			<fisheye id="EditarRegistroDeAula" image="/img/editar.png" tooltiptext="Editar"/>
+			<fisheye id="DeletarRegistroDeAula" image="/img/deletar.png" tooltiptext="Excluir"/>
+
+		</fisheyebar>
+	<separator bar="true"/>
+		
+	<div id="FiltroRegistroDeAula" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+		<groupbox mold="3d" id="groupboxFiltro">
+        	 <caption label="Filtro - Registro De Aula"/>  
+				<grid>
+					<columns>
+						<column  width="20%"/>
+						<column />	
+					</columns>
+				
+					<rows>
+						
+						<row>Ano Letivo:<combobox id="anoLetivoCombo" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowNivel">Nível Escolar:<combobox id="nivelCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowSerie">Série:<combobox id="serieCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowTurma">Turma:<combobox id="turmaCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+						<row id="RowDisciplinaProfessor">Disciplina/Professor:<combobox id="disciplinaProfessorCombo" disabled="true" style="background: #FFFFFF;" readonly="true"/></row>
+					</rows>
+			</grid>
+			
+			<separator bar="true"></separator>
+			<div align="center"><button id="avancar" label="Avançar" visible="false" disabled="true"/>
+			<button id="listarRegistro" label="Listar Registros" visible="false" disabled="true"/></div>
+			
+		</groupbox>
+	
+	</div>
+	
+	<div id="pesquisarRegistroDeAula" style="height:100%;width:1160px;position:absolute; margin: 5px 30px;" visible="false">
+			<hbox>Pesquisa:
+					<textbox id="ProcurarRegistroDeAula"/>
+					<button id="resultadoRegistroDeAula" label="Busca"/>	
+			</hbox>
+			<separator bar="true" style="padding-top: 5px;"></separator>
+		</div>
+	
+	<div id="cadastroRegistroDeAula" style="height:100%;width:1160px;position:absolute; margin: 20px 30px;" visible="false">
+			
+		<groupbox mold="3d" id="groupboxTurma">
+         	<caption label="Cadastro de Registro De Aula"  />
+         		<grid>
+         			<rows>
+         			<row id="rowId" visible="false">Id:<textbox id="id" disabled="true"/></row>
+         			<row>Disciplina:<label id="disciplina" /></row>
+         			<row>Professor:<label id="professor" /></row>
+					<row>Data:<datebox id="data" /></row>
+					<row>Assunto:<textbox id="assunto"  rows="4" width="450px"/></row>
+					<row>Qtd. de Aulas:<intbox id="qtdAula" /></row>
+					</rows>
+				</grid>
+				<separator bar="true"></separator>
+				<div align="center"><button id="adicionar" label="Adicionar"/>
+				<button id="salvar" label="Salvar"/>
+				<button id="cancelar" label="Cancelar"/></div>
+		</groupbox>
+		
+	</div>
+	
+	<div id="JanelaRegistroDeAula" style="height:100%;width:1160px;position:absolute; margin: 40px 30px;" visible="false">
+			
+		<groupbox mold="3d">
+         	<caption label="Lista de Registro de Aulas"  />
+         			
+				<listbox id="ListagemRegistroDeAula" mold="paging" pageSize="10" tooltiptext="Selecione uma Linha para Editar ou Excluir!">
+
+					<listhead sizable="true" >
+							<listheader id="IdTurmaCabeça" align="center" width="30px" label="Id"  />
+							<listheader id="AssuntoCabeça" align="center" width="250px" label="Assunto"  />
+							<listheader id="DataCabeça" align="center" width="150px" label="Data"  />
+							<listheader id="QtdAulaCabeça" align="center" width="100px" label="Qtd. Aula" />
+							<listheader id="DisciplinaCabeça" align="center" width="150px" label="Disciplina"/>
+							<listheader id="ProfessorCabeça" align="center" width="150px" label="Professor" />
+							<listheader id="TurmaCabeça" align="center" width="100px" label="Sala"/>
+							<listheader id="SerieTurmaCabeça" align="center" width="80px" label="Serie" />
+							<listheader id="NivelEscolarTurmaCabeça" align="center" width="100px" label="Nível Escolar" />
+					</listhead>
+					
+					<listitem self="@{each=registroDeAula}" >
+						<listcell label="@{registroDeAula.id}"/>
+						<listcell label="@{registroDeAula.assunto}"/>
+						<listcell label="@{registroDeAula.data}"/>
+						<listcell label="@{registroDeAula.qtdAula}"/>
+						<listcell label="@{registroDeAula.registroDeDisciplina.disciplina.nome}"/>
+						<listcell label="@{registroDeAula.registroDeDisciplina.professor.nome}"/>
+						<listcell label="@{registroDeAula.registroDeDisciplina.turma.nome}"/>
+						<listcell label="@{registroDeAula.registroDeDisciplina.turma.serie.descricao}"/>
+						<listcell label="@{registroDeAula.registroDeDisciplina.turma.serie.nivelEscolar.nivel}"/>
+					</listitem>  
+					
+	    		</listbox>
+		</groupbox>
+		
+	</div>		
+
+</window>
+
+
+</zk>
